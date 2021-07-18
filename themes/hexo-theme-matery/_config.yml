@@ -540,8 +540,8 @@ subtitle:
   typeSpeed: 100 # 打字速度
   backSpeed: 50 # 删除速度
   sub:
-    - 从来没有真正的绝境, 只有心灵的迷途
-    - Never really desperate, only the lost of the soul
+    - 心静了，才能听见自己的内心
+    - Only when your heart is calm can you hear your heart
 
 # 手机二级菜单.
 navMenu:
