@@ -1,10 +1,11 @@
 ---
-title: 计算机网络
-date: 2021-07-18 22:32:36
+title: VIM
+date: 2021-07-22 03:32:36
 author: dFaruiy
 tags: 
  - linux
  - vim
+
 top: true
 toc: true
 categories: vim
