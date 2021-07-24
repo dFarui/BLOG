@@ -11,7 +11,9 @@ toc: true
 categories: vim
 keywords: VIM
 ---
-# VIM install
+# VIM
+
+## VIM install
 | software | version |
 | :----: | :----: |
 | system | centos8.4.2105 |
@@ -21,7 +23,7 @@ keywords: VIM
 | ctags | 5.8 |
 | other | gcc, gcc-c++, make, kernel-devel |
 
-## update vim version to 8.2
+### update vim version to 8.2
 ```shell
 # vim --version
 VIM - Vi IMproved 8.2 (2019 Dec 12, compiled Jul 24 2021 10:33:06)
@@ -97,39 +99,281 @@ dnf install ncurses ncurses-devel
 make && make install
 ```
 
-# VIM config
+## VIM config
 
-## Plugin and Instruction manual
+### Plugin and Instruction manual
 - `VundleVim/Vundle.vim`
-   插件管理
+   #### 插件管理
 - `Lokaltog/vim-powerline`
-   状态栏
+   #### 状态栏，vimrc配置
+   ```vim
+   " Powerline 设置
+   " 设置状态栏主题风格
+   " 将字体设置为Meslo LG S DZ Regular for Powerline 13号大小
+   set guifont=Meslo\ LG\ S\ DZ\ Regular\ for\ Powerline:h13
+   
+   let g:Powerline_symbols = 'fancy'       " Powerline_symbols为状态栏中的箭头，unicode没有箭头
+   "let g:Powerline_symbols= 'unicode'
+   
+   set laststatus=2                " 必须设置为2,否则状态栏不显示
+   set t_Co=256                    " 开启256颜色之后，colorschema在vim里好看了许多
+   let g:Powerline_colorscheme='solarized256'  " 状态栏使用了solarized256配色方案
+   ```
    ![powerline](https://raw.githubusercontent.com/dFarui/images/master/powerline.png)
 - `majutsushi/tagbar`
+    #### 使用插件
     ```shell
     # 依赖ctags
     dnf install ctags
-    # 插件使用方式
-    <space> + t
+    # 插件使用方式 每个人设置不同，详细根据vimrc文件设置使用<space>键位为leader键
+    <space> + t: 打开tagbar
+    ?: 快捷帮助文档
+    ```
+    #### vimrc配置
+    ```vim
+    "------------tagbar--------
+    "设置显示／隐藏标签列表子窗口的快捷键。速记：identifier list by tag
+    nnoremap <Leader>t :TagbarToggle<CR>
+    let tagbar_right=1                                "设置tagbar 子窗口的位置出现在主编辑区的右边
     ```
 - `scrooloose/nerdcommenter`
+   #### 多行注释
+   #### 插件使用方法：
+   ```shell
+   <space> +cc  #生成注释
+   <space> +cu  #删除注释
+   ```
 - `Xuyuanp/nerdtree-git-plugin`
+   #### 目录树添加git图标
+   ```vim
+   " 开发的过程中，我们希望git信息直接在NERDTree中显示出来， 和Eclipse一样，修改的文件和增加的文件都给出相应的标注， 这时需要安   装的插件就是 nerdtree-git-plugin,配置信息如下
+   let g:NERDTreeGitStatusIndicatorMapCustom = {
+       \ "Modified"  : "✹",
+       \ "Staged"    : "✚",
+       \ "Untracked" : "✭",
+       \ "Renamed"   : "➜",
+       \ "Unmerged"  : "═",
+       \ "Deleted"   : "✖",
+       \ "Dirty"     : "✗",
+       \ "Clean"     : "✔︎",
+       \ "Unknown"   : "?"
+       \ }
+   ```
 - `scrooloose/nerdtree`
+   #### 添加目录树
+   #### vimrc配置
+   ```vim
+   "------------NERDTree------------
+   " 使用 NERDTree 插件查看工程文件。设置快捷键，速记：file list
+   nmap <Leader>f :NERDTreeToggle<CR>
+   
+   let NERDTreeChDirMode=1
+   
+   "显示书签"
+   let NERDTreeShowBookmarks=1
+   
+   "设置忽略文件类型"
+   let NERDTreeIgnore=['\~$', '\.pyc$', '\.swp$']
+   
+   "窗口大小"
+   let NERDTreeWinSize=35
+   
+   " 修改默认箭头
+   let g:NERDTreeDirArrowExpandable = '▸'
+   let g:NERDTreeDirArrowCollapsible = '▾'
+   
+   "How can I open a NERDTree automatically when vim starts up if no files were specified?
+   autocmd StdinReadPre * let s:std_in=1
+   autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+   
+   " 打开vim时自动打开NERDTree
+   " autocmd vimenter * NERDTree
+   
+   "How can I open NERDTree automatically when vim starts up on opening a directory?
+   autocmd StdinReadPre * let s:std_in=1
+   autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()   [0] | wincmd p | ene | endif
+   
+   " 关闭vim时，如果打开的文件除了NERDTree没有其他文件时，它自动关闭，减少多次按:q!
+   autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+   
+   " 显示行号
+   "let NERDTreeShowLineNumbers=1
+   let NERDTreeAutoCenter=1
+   ```
+   #### 使用插件
+   ```txt
+   <sapce> + f: 自定义启用/隐藏目录树
+   ?: 快速帮助文档
+   o: 打开一个目录或者打开文件，创建的是buffer，也可以用来打开书签
+   go: 打开一个文件，但是光标仍然留在NERDTree，创建的是buffer
+   t: 打开一个文件，创建的是Tab，对书签同样生效
+   T: 打开一个文件，但是光标仍然留在NERDTree，创建的是Tab，对书签同样生效
+   i: 水平分割创建文件的窗口，创建的是buffer
+   gi: 水平分割创建文件的窗口，但是光标仍然留在NERDTree
+   s: 垂直分割创建文件的窗口，创建的是buffer
+   gs: 和gi，go类似
+   x: 收起当前打开的目录
+   X: 收起所有打开的目录
+   e: 以文件管理的方式打开选中的目录
+   D: 删除书签
+   P: 大写，跳转到当前根路径
+   p: 小写，跳转到光标所在的上一级路径
+   K: 跳转到第一个子路径
+   J: 跳转到最后一个子路径
+   <C-j>和<C-k>: 在同级目录和文件间移动，忽略子目录和子文件
+   C: 将根路径设置为光标所在的目录
+   u: 设置上级目录为根路径
+   U: 设置上级目录为跟路径，但是维持原来目录打开的状态
+   r: 刷新光标所在的目录
+   R: 刷新当前根路径
+   I: 显示或者不显示隐藏文件
+   f: 打开和关闭文件过滤器
+   q: 关闭NERDTree
+   A: 全屏显示NERDTree，或者关闭全屏
+   ```
 - `tpope/vim-fugitive`
+   VIM CMD 模式中使用git命令，和普通命令一样，但是需要大写G;也有特定的命令:
+   |git|fugitive|action
+   |:----|:----|:----:|
+   |:Git add %|:Gwrite|	Stage the current file to the index|
+   |:Git checkout %|:Gread|Revert current file to last checked in version|
+   |:Git rm %|:Gremove|Delete the current file and the corresponding Vim buffer|
+   |:Git mv %|:Gmove|Rename the current file and the corresponding Vim buffer|
+   Git --> : --> G
+
 - `ctrlpvim/ctrlp.vim`
+   搜索历史打开文件，在normal模式下按ctrl+p触发
+   使用方式：
+   ```vim
+   Press <F5> to purge the cache for the current directory to get new files, remove deleted files and apply new ignore options.
+   Press <c-f> and <c-b> to cycle between modes.
+   Press <c-d> to switch to filename only search instead of full path.
+   Press <c-r> to switch to regexp mode.
+   Use <c-j>, <c-k> or the arrow keys to navigate the result list.
+   Use <c-t> or <c-v>, <c-x> to open the selected entry in a new tab or in a new split.
+   Use <c-n>, <c-p> to select the next/previous string in the prompt's history.
+   Use <c-y> to create a new file and its parent directories.
+   Use <c-z> to mark/unmark multiple files and <c-o> to open them.
+   ```
+
 - `Lokaltog/vim-easymotion`
+   快速跳转，按两下leader键和f组合,查找单个字符，然后快速跳转
 - `vim-scripts/ShowTrailingWhitespace.git`
+   高亮显示行尾的多余空白字符
 - `kshenoy/vim-signature`
+   书签可视化的插件
+   ```vim
+   let g:SignatureMap = {
+        \ 'Leader'             :  "m",
+        \ 'PlaceNextMark'      :  "m,",
+        \ 'ToggleMarkAtLine'   :  "m.",
+        \ 'PurgeMarksAtLine'   :  "m-",
+        \ 'DeleteMark'         :  "dm",
+        \ 'PurgeMarks'         :  "mda",
+        \ 'PurgeMarkers'       :  "m<BS>",
+        \ 'GotoNextLineAlpha'  :  "']",
+        \ 'GotoPrevLineAlpha'  :  "'[",
+        \ 'GotoNextSpotAlpha'  :  "`]",
+        \ 'GotoPrevSpotAlpha'  :  "`[",
+        \ 'GotoNextLineByPos'  :  "]'",
+        \ 'GotoPrevLineByPos'  :  "['",
+        \ 'GotoNextSpotByPos'  :  "mn",
+        \ 'GotoPrevSpotByPos'  :  "mp",
+        \ 'GotoNextMarker'     :  "[+",
+        \ 'GotoPrevMarker'     :  "[-",
+        \ 'GotoNextMarkerAny'  :  "]=",
+        \ 'GotoPrevMarkerAny'  :  "[=",
+        \ 'ListLocalMarks'     :  "ms",
+        \ 'ListLocalMarkers'   :  "m?"
+        \ }
+   ```
 - `vim-scripts/BOOKMARKS--Mark-and-Highlight-Full-Lines`
+   书签行高亮
 - `vim-scripts/Solarized.git`
+   主题方案
 - `nathanaelkane/vim-indent-guides.git`
+   缩进对齐显示
+   ```vim
+   <Leader> + sj : 开/关缩进可视化
+   ```
 - `vim-scripts/Markdown`
+   Markdown语法高亮
 - `ekalinin/Dockerfile.vim`
+   Dockerfile语法高亮
 - `Valloric/YouCompleteMe`
+   自动补全插件,通过Vundle安装后，还需要手动编译
+   安装YCM
+   ```vim
+   # 官方推荐使用Vundle安装，只需将下面命令加入到~/.vimrc
+   Plugin 'Valloric/YouCompleteMe'
+
+   # 如果`:PluginInstall`过程出错，则退出重新尝试，或者直接从git上下载到`～/.vim/bundle/YouCompleteMe` 目录下
+   git clone https://github.com/Valloric/YouCompleteMe#full-installation-guide ～/.vim/bundle/YouCompleteMe
+   ```
+   编译YCM
+   ```shell
+   cd ~/.vim/bundle/YouCompleteMe
+   git submodule update --init --recursive
+   python3 install.py
+   ```
+   配置YCM
+   ```vim
+   " 补全菜单的开启与关闭
+   set completeopt=longest,menu                    " 让Vim的补全菜单行为与一般IDE一致(参考VimTip1228)
+   let g:ycm_min_num_of_chars_for_completion=2             " 从第2个键入字符就开始罗列匹配项
+   let g:ycm_cache_omnifunc=0                      " 禁止缓存匹配项,每次都重新生成匹配项
+   let g:ycm_autoclose_preview_window_after_completion=1       " 智能关闭自动补全窗口
+   autocmd InsertLeave * if pumvisible() == 0|pclose|endif         " 离开插入模式后自动关闭预览窗口
+   
+   " 补全菜单中各项之间进行切换和选取：默认使用tab  s-tab进行上下切换，使用空格选取。可进行自定义设置：
+   "let g:ycm_key_list_select_completion=['<c-n>']
+   "let g:ycm_key_list_select_completion = ['<Down>']      " 通过上下键在补全菜单中进行切换
+   "let g:ycm_key_list_previous_completion=['<c-p>']
+   "let g:ycm_key_list_previous_completion = ['<Up>']
+   " 回车即选中补全菜单中的当前项
+   inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"
+   
+   " 开启各种补全引擎
+   let g:ycm_collect_identifiers_from_tags_files=1         " 开启 YCM 基于标签引擎
+   let g:ycm_auto_trigger = 1                  " 开启 YCM 基于标识符补全，默认为1
+   let g:ycm_seed_identifiers_with_syntax=1                " 开启 YCM 基于语法关键字补全
+   let g:ycm_complete_in_comments = 1              " 在注释输入中也能补全
+   let g:ycm_complete_in_strings = 1               " 在字符串输入中也能补全
+   let g:ycm_collect_identifiers_from_comments_and_strings = 0 " 注释和字符串中的文字也会被收入补全
+   
+   " 重映射快捷键
+   "上下左右键的行为 会显示其他信息,inoremap由i 插入模式和noremap不重映射组成，只映射一层，不会映射到映射的映射
+   inoremap <expr> <Down>     pumvisible() ? "\<C-n>" : "\<Down>"
+   inoremap <expr> <Up>       pumvisible() ? "\<C-p>" : "\<Up>"
+   inoremap <expr> <PageDown> pumvisible() ? "\<PageDown>\<C-p>\<C-n>" : "\<PageDown>"
+   inoremap <expr> <PageUp>   pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<PageUp>"
+   
+   "nnoremap <F5> :YcmForceCompileAndDiagnostics<CR>           " force recomile with syntastic
+   "nnoremap <leader>lo :lopen<CR>    "open locationlist
+   "nnoremap <leader>lc :lclose<CR>    "close locationlist
+   "inoremap <leader><leader> <C-x><C-o>
+   
+   nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR> " 跳转到定义处
+   let g:ycm_confirm_extra_conf=0                  " 关闭加载.ycm_extra_conf.py确认提示
+   ```
 - `luochen1990/rainbow`
+   彩虹括号
 - `vim-scripts/indentpython.vim`
+   python 自动缩进
 - `tell-k/vim-autopep8`
+   python代码自动格式化为符合pep8标准
+   ```vim
+   " 按照PEP8标准来配置vim
+   au BufNewFile,BufRead *.py set tabstop=4 |set softtabstop=4|set shiftwidth=4|set textwidth=79|set expandtab|set autoindent|set fileformat=unix
+   
+   " Disable show diff window
+   let g:autopep8_disable_show_diff=1
+   
+   " vim-autopep8自1.11版本之后取消了F8快捷键，需要用户自己为:Autopep8设置快捷键：
+   autocmd FileType python noremap <buffer> <F8> :call Autopep8()<CR>
+   ```
 - `ryanoasis/vim-devicons`
+   Adds file type icons to Vim plugins such as: NERDTree, vim-airline, CtrlP, unite, Denite, lightline, vim-startify and many more
 
 ## vimrc
 ```vim
