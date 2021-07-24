@@ -11,13 +11,107 @@ toc: true
 categories: vim
 keywords: VIM
 ---
+# VIM install
+| software | version |
+| :----: | :----: |
+| system | centos8.4.2105 |
+| python | python3.6.8 |
+| vim | 8.2 |
+| cmake | 3.18.2 |
+| ctags | 5.8 |
+| other | gcc, gcc-c++, make, kernel-devel |
+
+## update vim version to 8.2
+```shell
+# vim --version
+VIM - Vi IMproved 8.2 (2019 Dec 12, compiled Jul 24 2021 10:33:06)
+Compiled by root@centos8
+Huge version without GUI.  Features included (+) or not (-):
++acl               -farsi             -mouse_sysmouse    -tag_old_static
++arabic            +file_in_path      +mouse_urxvt       -tag_any_white
++autocmd           +find_in_path      +mouse_xterm       -tcl
++autochdir         +float             +multi_byte        +termguicolors
+-autoservername    +folding           +multi_lang        +terminal
+-balloon_eval      -footer            -mzscheme          +terminfo
++balloon_eval_term +fork()            +netbeans_intg     +termresponse
+-browse            +gettext           +num64             +textobjects
+++builtin_terms    -hangul_input      +packages          +textprop
++byte_offset       +iconv             +path_extra        +timers
++channel           +insert_expand     -perl              +title
++cindent           +job               +persistent_undo   -toolbar
+-clientserver      +jumplist          +popupwin          +user_commands
+-clipboard         +keymap            +postscript        +vartabs
++cmdline_compl     +lambda            +printer           +vertsplit
++cmdline_hist      +langmap           +profile           +virtualedit
++cmdline_info      +libcall           -python            +visual
++comments          +linebreak         +python3           +visualextra
++conceal           +lispindent        +quickfix          +viminfo
++cryptv            +listcmds          +reltime           +vreplace
++cscope            +localmap          +rightleft         +wildignore
++cursorbind        -lua               -ruby              +wildmenu
++cursorshape       +menu              +scrollbind        +windows
++dialog_con        +mksession         +signs             +writebackup
++diff              +modify_fname      +smartindent       -X11
++digraphs          +mouse             -sound             -xfontset
+-dnd               -mouseshape        +spell             -xim
+-ebcdic            +mouse_dec         +startuptime       -xpm
++emacs_tags        -mouse_gpm         +statusline        -xsmp
++eval              -mouse_jsbterm     -sun_workshop      -xterm_clipboard
++ex_extra          +mouse_netterm     +syntax            -xterm_save
++extra_search      +mouse_sgr         +tag_binary
+   system vimrc file: "$VIM/vimrc"
+     user vimrc file: "$HOME/.vimrc"
+ 2nd user vimrc file: "~/.vim/vimrc"
+      user exrc file: "$HOME/.exrc"
+       defaults file: "$VIMRUNTIME/defaults.vim"
+  fall-back for $VIM: "/usr/local/share/vim"
+Compilation: gcc -c -I. -Iproto -DHAVE_CONFIG_H     -g -O2 -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=1
+Linking: gcc   -L/usr/local/lib -Wl,--as-needed -o vim        -lm -ltinfo   -ldl     -L/usr/lib/python3.6/config -lpython3.6m
+```
+确保VIM版本为最新并且支持python3（执行vim --version后，显示`+python3`，表示支持python3）
+centos8自带vim版本为vim8.0，并不满足接下来的配置，需要重新编译安装vim8.2，步骤如下：
+```shell
+# 下载vim8.2的包
+wget https://ftp.nluug.nl/pub/vim/unix/vim-8.2.tar.bz2
+
+# 解压
+tar xvf vim-8.2.tar.bz2
+
+# cd ./vim82 , 重新编译VIM8.2
+cd ./vim82
+./configure --enable-python3interp=yes --with-python3-config-dir=/usr/lib/python3.6/config #确保重新编译的VIM8.2支持python3
+```
+configure 的过程可能会出现如下问题：
+```log
+no terminal library found
+checking for tgetent()… configure: error: NOT FOUND!
+You need to install a terminal library; for example ncurses.
+Or specify the name of the library with –with-tlib.
+```
+workaround
+```shell
+dnf install ncurses ncurses-devel
+```
+编译安装
+```shell
+make && make install
+```
 
 # VIM config
 
 ## Plugin and Instruction manual
 - `VundleVim/Vundle.vim`
+   插件管理
 - `Lokaltog/vim-powerline`
+   状态栏
+   
 - `majutsushi/tagbar`
+    ```shell
+    # 依赖ctags
+    dnf install ctags
+    # 插件使用方式
+    <space> + t
+    ```
 - `scrooloose/nerdcommenter`
 - `Xuyuanp/nerdtree-git-plugin`
 - `scrooloose/nerdtree`
