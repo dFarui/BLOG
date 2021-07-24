@@ -104,7 +104,7 @@ make && make install
    插件管理
 - `Lokaltog/vim-powerline`
    状态栏
-   
+   ![powerline](https://raw.githubusercontent.com/dFarui/images/master/powerline.png)
 - `majutsushi/tagbar`
     ```shell
     # 依赖ctags
