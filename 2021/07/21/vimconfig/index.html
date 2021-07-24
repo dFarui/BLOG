@@ -404,14 +404,14 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2021-07-22
+                    2021-07-24
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    2.2k
+                    2.7k
                 </div>
                 
 
@@ -436,10 +436,109 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="VIM-config"><a href="#VIM-config" class="headerlink" title="VIM config"></a>VIM config</h1><h2 id="Plugin-and-Instruction-manual"><a href="#Plugin-and-Instruction-manual" class="headerlink" title="Plugin and Instruction manual"></a>Plugin and Instruction manual</h2><ul>
-<li><code>VundleVim/Vundle.vim</code></li>
-<li><code>Lokaltog/vim-powerline</code></li>
-<li><code>majutsushi/tagbar</code></li>
+                <h1 id="VIM-install"><a href="#VIM-install" class="headerlink" title="VIM install"></a>VIM install</h1><table>
+<thead>
+<tr>
+<th align="center">software</th>
+<th align="center">version</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">system</td>
+<td align="center">centos8.4.2105</td>
+</tr>
+<tr>
+<td align="center">python</td>
+<td align="center">python3.6.8</td>
+</tr>
+<tr>
+<td align="center">vim</td>
+<td align="center">8.2</td>
+</tr>
+<tr>
+<td align="center">cmake</td>
+<td align="center">3.18.2</td>
+</tr>
+<tr>
+<td align="center">ctags</td>
+<td align="center">5.8</td>
+</tr>
+<tr>
+<td align="center">other</td>
+<td align="center">gcc, gcc-c++, make, kernel-devel</td>
+</tr>
+</tbody></table>
+<h2 id="update-vim-version-to-8-2"><a href="#update-vim-version-to-8-2" class="headerlink" title="update vim version to 8.2"></a>update vim version to 8.2</h2><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"># vim --version
+VIM - Vi IMproved 8.2 (2019 Dec 12, compiled Jul 24 2021 10:33:06)
+Compiled by root@centos8
+Huge version without GUI.  Features included (+) or not (-):
++acl               -farsi             -mouse_sysmouse    -tag_old_static
++arabic            +file_in_path      +mouse_urxvt       -tag_any_white
++autocmd           +find_in_path      +mouse_xterm       -tcl
++autochdir         +float             +multi_byte        +termguicolors
+-autoservername    +folding           +multi_lang        +terminal
+-balloon_eval      -footer            -mzscheme          +terminfo
++balloon_eval_term +fork()            +netbeans_intg     +termresponse
+-browse            +gettext           +num64             +textobjects
+++builtin_terms    -hangul_input      +packages          +textprop
++byte_offset       +iconv             +path_extra        +timers
++channel           +insert_expand     -perl              +title
++cindent           +job               +persistent_undo   -toolbar
+-clientserver      +jumplist          +popupwin          +user_commands
+-clipboard         +keymap            +postscript        +vartabs
++cmdline_compl     +lambda            +printer           +vertsplit
++cmdline_hist      +langmap           +profile           +virtualedit
++cmdline_info      +libcall           -python            +visual
++comments          +linebreak         +python3           +visualextra
++conceal           +lispindent        +quickfix          +viminfo
++cryptv            +listcmds          +reltime           +vreplace
++cscope            +localmap          +rightleft         +wildignore
++cursorbind        -lua               -ruby              +wildmenu
++cursorshape       +menu              +scrollbind        +windows
++dialog_con        +mksession         +signs             +writebackup
++diff              +modify_fname      +smartindent       -X11
++digraphs          +mouse             -sound             -xfontset
+-dnd               -mouseshape        +spell             -xim
+-ebcdic            +mouse_dec         +startuptime       -xpm
++emacs_tags        -mouse_gpm         +statusline        -xsmp
++eval              -mouse_jsbterm     -sun_workshop      -xterm_clipboard
++ex_extra          +mouse_netterm     +syntax            -xterm_save
++extra_search      +mouse_sgr         +tag_binary
+   system vimrc file: &quot;$VIM&#x2F;vimrc&quot;
+     user vimrc file: &quot;$HOME&#x2F;.vimrc&quot;
+ 2nd user vimrc file: &quot;~&#x2F;.vim&#x2F;vimrc&quot;
+      user exrc file: &quot;$HOME&#x2F;.exrc&quot;
+       defaults file: &quot;$VIMRUNTIME&#x2F;defaults.vim&quot;
+  fall-back for $VIM: &quot;&#x2F;usr&#x2F;local&#x2F;share&#x2F;vim&quot;
+Compilation: gcc -c -I. -Iproto -DHAVE_CONFIG_H     -g -O2 -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE&#x3D;1
+Linking: gcc   -L&#x2F;usr&#x2F;local&#x2F;lib -Wl,--as-needed -o vim        -lm -ltinfo   -ldl     -L&#x2F;usr&#x2F;lib&#x2F;python3.6&#x2F;config -lpython3.6m<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>确保VIM版本为最新并且支持python3（执行vim –version后，显示<code>+python3</code>，表示支持python3）<br>centos8自带vim版本为vim8.0，并不满足接下来的配置，需要重新编译安装vim8.2，步骤如下：</p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"># 下载vim8.2的包
+wget https:&#x2F;&#x2F;ftp.nluug.nl&#x2F;pub&#x2F;vim&#x2F;unix&#x2F;vim-8.2.tar.bz2
+
+# 解压
+tar xvf vim-8.2.tar.bz2
+
+# cd .&#x2F;vim82 , 重新编译VIM8.2
+cd .&#x2F;vim82
+.&#x2F;configure --enable-python3interp&#x3D;yes --with-python3-config-dir&#x3D;&#x2F;usr&#x2F;lib&#x2F;python3.6&#x2F;config #确保重新编译的VIM8.2支持python3<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>configure 的过程可能会出现如下问题：</p>
+<pre class="line-numbers language-log" data-language="log"><code class="language-log">no terminal library found
+checking for tgetent<span class="token operator">(</span><span class="token operator">)</span>… configure<span class="token operator">:</span> error<span class="token operator">:</span> NOT FOUND<span class="token operator">!</span>
+You need to install a terminal library<span class="token operator">;</span> for example ncurses<span class="token punctuation">.</span>
+Or specify the name of the library with –with<span class="token operator">-</span>tlib<span class="token punctuation">.</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>workaround</p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">dnf install ncurses ncurses-devel<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>编译安装</p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">make &amp;&amp; make install<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h1 id="VIM-config"><a href="#VIM-config" class="headerlink" title="VIM config"></a>VIM config</h1><h2 id="Plugin-and-Instruction-manual"><a href="#Plugin-and-Instruction-manual" class="headerlink" title="Plugin and Instruction manual"></a>Plugin and Instruction manual</h2><ul>
+<li><code>VundleVim/Vundle.vim</code><br> 插件管理</li>
+<li><code>Lokaltog/vim-powerline</code><br> 状态栏</li>
+<li><code>majutsushi/tagbar</code>  <pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"># 依赖ctags
+dnf install ctags
+# 插件使用方式
+&lt;space&gt; + t<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre></li>
 <li><code>scrooloose/nerdcommenter</code></li>
 <li><code>Xuyuanp/nerdtree-git-plugin</code></li>
 <li><code>scrooloose/nerdtree</code></li>
