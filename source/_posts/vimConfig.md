@@ -103,9 +103,9 @@ make && make install
 
 ### Plugin and Instruction manual
 - `VundleVim/Vundle.vim`
-   #### 插件管理
+   **插件管理**
 - `Lokaltog/vim-powerline`
-   #### 状态栏，vimrc配置
+   **状态栏，vimrc配置**
    ```vim
    " Powerline 设置
    " 设置状态栏主题风格
@@ -121,7 +121,7 @@ make && make install
    ```
    ![powerline](https://raw.githubusercontent.com/dFarui/images/master/powerline.png)
 - `majutsushi/tagbar`
-    #### 使用插件
+    **使用插件**
     ```shell
     # 依赖ctags
     dnf install ctags
@@ -129,7 +129,7 @@ make && make install
     <space> + t: 打开tagbar
     ?: 快捷帮助文档
     ```
-    #### vimrc配置
+    **vimrc配置**
     ```vim
     "------------tagbar--------
     "设置显示／隐藏标签列表子窗口的快捷键。速记：identifier list by tag
@@ -137,14 +137,14 @@ make && make install
     let tagbar_right=1                                "设置tagbar 子窗口的位置出现在主编辑区的右边
     ```
 - `scrooloose/nerdcommenter`
-   #### 多行注释
-   #### 插件使用方法：
+   **多行注释**
+   **插件使用方法**：
    ```shell
    <space> +cc  #生成注释
    <space> +cu  #删除注释
    ```
 - `Xuyuanp/nerdtree-git-plugin`
-   #### 目录树添加git图标
+   **目录树添加git图标**
    ```vim
    " 开发的过程中，我们希望git信息直接在NERDTree中显示出来， 和Eclipse一样，修改的文件和增加的文件都给出相应的标注， 这时需要安   装的插件就是 nerdtree-git-plugin,配置信息如下
    let g:NERDTreeGitStatusIndicatorMapCustom = {
@@ -160,8 +160,8 @@ make && make install
        \ }
    ```
 - `scrooloose/nerdtree`
-   #### 添加目录树
-   #### vimrc配置
+   **添加目录树**
+   **vimrc配置**  
    ```vim
    "------------NERDTree------------
    " 使用 NERDTree 插件查看工程文件。设置快捷键，速记：file list
@@ -200,7 +200,7 @@ make && make install
    "let NERDTreeShowLineNumbers=1
    let NERDTreeAutoCenter=1
    ```
-   #### 使用插件
+   **使用插件**
    ```txt
    <sapce> + f: 自定义启用/隐藏目录树
    ?: 快速帮助文档
@@ -239,11 +239,11 @@ make && make install
    |:Git checkout %|:Gread|Revert current file to last checked in version|
    |:Git rm %|:Gremove|Delete the current file and the corresponding Vim buffer|
    |:Git mv %|:Gmove|Rename the current file and the corresponding Vim buffer|
-   Git --> : --> G
+   **Git --> : --> G**
 
 - `ctrlpvim/ctrlp.vim`
-   搜索历史打开文件，在normal模式下按ctrl+p触发
-   使用方式：
+   **搜索历史打开文件，在normal模式下按ctrl+p触发**
+   **使用方式：**
    ```vim
    Press <F5> to purge the cache for the current directory to get new files, remove deleted files and apply new ignore options.
    Press <c-f> and <c-b> to cycle between modes.
@@ -257,11 +257,11 @@ make && make install
    ```
 
 - `Lokaltog/vim-easymotion`
-   快速跳转，按两下leader键和f组合,查找单个字符，然后快速跳转
+   **快速跳转，按两下leader键和f组合,查找单个字符，然后快速跳转**
 - `vim-scripts/ShowTrailingWhitespace.git`
-   高亮显示行尾的多余空白字符
+   **高亮显示行尾的多余空白字符**
 - `kshenoy/vim-signature`
-   书签可视化的插件
+   **书签可视化的插件**
    ```vim
    let g:SignatureMap = {
         \ 'Leader'             :  "m",
@@ -288,21 +288,50 @@ make && make install
         \ }
    ```
 - `vim-scripts/BOOKMARKS--Mark-and-Highlight-Full-Lines`
-   书签行高亮
+   **书签行高亮**
 - `vim-scripts/Solarized.git`
-   主题方案
-- `nathanaelkane/vim-indent-guides.git`
-   缩进对齐显示
+   **主题方案**
    ```vim
-   <Leader> + sj : 开/关缩进可视化
+   if has("gui_running")
+       set guioptions=gR
+       set mousemodel=popup
+       set background=light
+       ""hi LineNr cterm=bold guibg=black guifg=white
+       ""hi CursorLine cterm=none ctermbg=lightgray ctermfg=none
+       ""hi CursorColumn cterm=none ctermbg=lightgray ctermfg=none
+   else
+       set background=dark
+       ""hi LineNr cterm=bold ctermbg=black ctermfg=white
+       ""hi CursorLine cterm=none ctermbg=darkgray ctermfg=none
+       ""hi CursorColumn cterm=none ctermbg=darkgray ctermfg=none
+   endif
+   
+   :silent! colorscheme solarized
+   "colorscheme default
+   ```
+- `nathanaelkane/vim-indent-guides.git`
+   **缩进对齐显示**
+   \<Leader> + sj : 开/关缩进可视化
+   ```vim
+   " indent guides
+   "let g:indent_guides_enable_on_vim_startup=1
+   " 从第二层开始可视化显示缩进
+   let g:indent_guides_start_level=2
+   "let g:indent_guides_auto_colors = 0
+   "hi IndentGuidesOdd  guibg=red   ctermbg=3
+   "hi IndentGuidesEven guibg=green ctermbg=4
+   " 色块宽度
+   let g:indent_guides_guide_size=1
+   " 快捷键 <Leader>sj 开/关缩进可视化
+   noremap <Leader>sj :IndentGuidesToggle<CR>
    ```
 - `vim-scripts/Markdown`
-   Markdown语法高亮
+   **Markdown语法高亮**
 - `ekalinin/Dockerfile.vim`
-   Dockerfile语法高亮
+   **Dockerfile语法高亮**
 - `Valloric/YouCompleteMe`
    自动补全插件,通过Vundle安装后，还需要手动编译
-   安装YCM
+   **安装YCM**
    ```vim
    # 官方推荐使用Vundle安装，只需将下面命令加入到~/.vimrc
    Plugin 'Valloric/YouCompleteMe'
@@ -310,13 +339,13 @@ make && make install
    # 如果`:PluginInstall`过程出错，则退出重新尝试，或者直接从git上下载到`～/.vim/bundle/YouCompleteMe` 目录下
    git clone https://github.com/Valloric/YouCompleteMe#full-installation-guide ～/.vim/bundle/YouCompleteMe
    ```
-   编译YCM
+   **编译YCM**
    ```shell
    cd ~/.vim/bundle/YouCompleteMe
    git submodule update --init --recursive
    python3 install.py
    ```
-   配置YCM
+   **配置YCM**
    ```vim
    " 补全菜单的开启与关闭
    set completeopt=longest,menu                    " 让Vim的补全菜单行为与一般IDE一致(参考VimTip1228)
@@ -357,11 +386,14 @@ make && make install
    let g:ycm_confirm_extra_conf=0                  " 关闭加载.ycm_extra_conf.py确认提示
    ```
 - `luochen1990/rainbow`
-   彩虹括号
+   **彩虹括号**
+   ```vim
+   let g:rainbow_active = 1 "0 if you want to enable it later via :RainbowToggle
+   ```
 - `vim-scripts/indentpython.vim`
-   python 自动缩进
+   **python 自动缩进**
 - `tell-k/vim-autopep8`
-   python代码自动格式化为符合pep8标准
+   **python代码自动格式化为符合pep8标准**
    ```vim
    " 按照PEP8标准来配置vim
    au BufNewFile,BufRead *.py set tabstop=4 |set softtabstop=4|set shiftwidth=4|set textwidth=79|set expandtab|set autoindent|set fileformat=unix
@@ -373,9 +405,14 @@ make && make install
    autocmd FileType python noremap <buffer> <F8> :call Autopep8()<CR>
    ```
 - `ryanoasis/vim-devicons`
-   Adds file type icons to Vim plugins such as: NERDTree, vim-airline, CtrlP, unite, Denite, lightline, vim-startify and many more
+   **Adds file type icons to Vim plugins such as: NERDTree, vim-airline, CtrlP, unite, Denite, lightline, vim-startify and many more**
 
-## vimrc
+## 配置完成的VIM
+![vim](https://raw.githubusercontent.com/dFarui/images/master/vim.png)
+
+## 完整的configure 
+
+### vimrc
 ```vim
 " 开启文件类型侦测
 filetype on
