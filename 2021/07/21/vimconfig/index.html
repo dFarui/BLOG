@@ -404,7 +404,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2021-07-25
+                    2021-08-01
                 </div>
                 
 
@@ -527,14 +527,14 @@ cd .&#x2F;vim82
 checking for tgetent<span class="token operator">(</span><span class="token operator">)</span>… configure<span class="token operator">:</span> error<span class="token operator">:</span> NOT FOUND<span class="token operator">!</span>
 You need to install a terminal library<span class="token operator">;</span> for example ncurses<span class="token punctuation">.</span>
 Or specify the name of the library with –with<span class="token operator">-</span>tlib<span class="token punctuation">.</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-<p>workaround</p>
+<p><strong>workaround</strong></p>
 <pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">dnf install ncurses ncurses-devel<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>编译安装</p>
+<p><strong>编译安装</strong></p>
 <pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">make &amp;&amp; make install<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <h2 id="VIM-config"><a href="#VIM-config" class="headerlink" title="VIM config"></a>VIM config</h2><h3 id="Plugin-and-Instruction-manual"><a href="#Plugin-and-Instruction-manual" class="headerlink" title="Plugin and Instruction manual"></a>Plugin and Instruction manual</h3><ul>
 <li><p><code>VundleVim/Vundle.vim</code><br> <strong>插件管理</strong></p>
-</li>
+ <pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">git clone https:&#x2F;&#x2F;github.com&#x2F;VundleVim&#x2F;Vundle.vim.git ~&#x2F;.vim&#x2F;bundle&#x2F;Vundle.vim<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
 <li><p><code>Lokaltog/vim-powerline</code><br> <strong>状态栏，vimrc配置</strong></p>
  <pre class="line-numbers language-vim" data-language="vim"><code class="language-vim"><span class="token comment">" Powerline 设置</span>
 <span class="token comment">" 设置状态栏主题风格</span>
@@ -816,6 +816,7 @@ au BufNewFile<span class="token punctuation">,</span>BufRead <span class="token 
 </li>
 </ul>
 <h2 id="配置完成的VIM"><a href="#配置完成的VIM" class="headerlink" title="配置完成的VIM"></a>配置完成的VIM</h2><p><img src="https://raw.githubusercontent.com/dFarui/images/master/vim.png" alt="vim"></p>
+<p><img src="https://raw.githubusercontent.com/dFarui/images/master/vim1.png" alt="vim1"></p>
 <h2 id="完整的configure"><a href="#完整的configure" class="headerlink" title="完整的configure"></a>完整的configure</h2><h3 id="vimrc"><a href="#vimrc" class="headerlink" title="vimrc"></a>vimrc</h3><pre class="line-numbers language-vim" data-language="vim"><code class="language-vim"><span class="token comment">" 开启文件类型侦测</span>
 <span class="token keyword">filetype</span> <span class="token keyword">on</span>
 <span class="token comment">" 根据侦测到的不同类型加载对应的插件</span>
@@ -1371,18 +1372,17 @@ nnoremap <span class="token operator">&lt;</span>leader<span class="token operat
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/BLOG/2021/07/21/vimconfig/">
+                <a href="/BLOG/2021/07/29/curl/">
                     <div class="card-image">
                         
                         
-                        <img src="/BLOG/medias/featureimages/2.jpg" class="responsive-img" alt="VIM">
+                        <img src="/BLOG/medias/featureimages/17.jpg" class="responsive-img" alt="curl 调用 openstack api">
                         
-                        <span class="card-title">VIM</span>
+                        <span class="card-title">curl 调用 openstack api</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -1392,22 +1392,21 @@ nnoremap <span class="token operator">&lt;</span>leader<span class="token operat
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-07-22
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2021-07-30
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/BLOG/categories/vim/" class="post-category">
-                                    vim
+                            <a href="/BLOG/categories/curl/" class="post-category">
+                                    curl
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
@@ -1415,8 +1414,8 @@ nnoremap <span class="token operator">&lt;</span>leader<span class="token operat
                         <span class="chip bg-color">linux</span>
                     </a>
                     
-                    <a href="/BLOG/tags/vim/">
-                        <span class="chip bg-color">vim</span>
+                    <a href="/BLOG/tags/curl/">
+                        <span class="chip bg-color">curl</span>
                     </a>
                     
                 </div>

@@ -1,0 +1,1579 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="curl">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>curl 调用 openstack api | Farui&#39;s BLOG</title>
+    <link rel="icon" type="image/png" href="/BLOG/medias/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/BLOG/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/BLOG/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/BLOG/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/BLOG/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/BLOG/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/BLOG/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/BLOG/css/my.css">
+
+    <script src="/BLOG/libs/jquery/jquery.min.js"></script>
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/BLOG/" class="waves-effect waves-light">
+                    
+                    <img src="/BLOG/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Farui&#39;s BLOG</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/BLOG/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/BLOG/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/BLOG/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/BLOG/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/BLOG/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/BLOG/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/BLOG/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/BLOG/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Farui&#39;s BLOG</div>
+        <div class="logo-desc">
+            
+            Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/BLOG/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/BLOG/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/BLOG/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/BLOG/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/BLOG/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/BLOG/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/BLOG/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/BLOG/medias/featureimages/17.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">curl 调用 openstack api</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/BLOG/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/BLOG/tags/linux/">
+                                <span class="chip bg-color">linux</span>
+                            </a>
+                        
+                            <a href="/BLOG/tags/curl/">
+                                <span class="chip bg-color">curl</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/BLOG/categories/curl/" class="post-category">
+                                curl
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2021-07-30
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2021-08-01
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    3.3k
+                </div>
+                
+
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/BLOG/libs/prism/prism.css">
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="curl"><a href="#curl" class="headerlink" title="curl"></a>curl</h1><h2 id="1-简介"><a href="#1-简介" class="headerlink" title="1.简介"></a>1.简介</h2><p><code>curl</code>是常用的命令行工具，用来请求web服务器，功能非常强大，命令行参数多大10几种。</p>
+<blockquote>
+<p>本文介绍他的主要参数命令；作为日常参考，方便查阅; <a target="_blank" rel="noopener" href="https://catonmat.net/cookbooks/curl">curl cookbook</a>; 初学者可以查看<a target="_blank" rel="noopener" href="https://www.ruanyifeng.com/blog/2011/09/curl.html">curl 初学者教程</a></p>
+</blockquote>
+<h2 id="2-使用"><a href="#2-使用" class="headerlink" title="2.使用"></a>2.使用</h2><ul>
+<li><p>不带任何参数是，curl就是发出GET请求</p>
+  <pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">$ curl https:&#x2F;&#x2F;www.example.com
+# 上面的命令向www.example.com 发出GET请求，服务器返回的内容会在命令行输出<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></li>
+<li><p><code>-A</code></p>
+<p>  <code>-A</code>参数指定客户端的用户端的用户代理标头，即User-Agent，curl的默认用户代理字符串是<code>curl/[version]</code></p>
+  <pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">$ curl -A &#39;Mozilla&#x2F;5.0 (Windows NT 10.0; Win64; x64) AppleWebKit&#x2F;537.36 (KHTML, like Gecko) Chrome&#x2F;76.0.3809.100 Safari&#x2F;537.36&#39; https:&#x2F;&#x2F;google.com
+# 上面命令将 User-Agent 改成 Chrome 浏览器。
+$ curl -A &#39;&#39; https:&#x2F;&#x2F;www.google.com
+# 上面命令会移除User-Agent标头
+# 也可以通过 -H 参数直接指定标头，更改User-Agent
+$ curl -H &#39;User-Agent: php&#x2F;1.0&#39; https:&#x2F;&#x2F;google.com<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+<li><p><code>-b</code></p>
+<p>  <code>-b</code>参数用来向服务器发送<code>Cookie</code></p>
+  <pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">$ curl -b &#39;foo-bar&#39; https:&#x2F;&#x2F;google.com
+# 上面命令会生成一个标头Cookie: foo&#x3D;bar，向服务器发送一个名为foo、值为bar的 Cookie。<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></li>
+<li><p><code>-c</code></p>
+<p>  <code>-c</code> 参数将服务器设置的 <code>Cookie</code> 写入一个文件。</p>
+  <pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">$ curl -c cookies.txt https:&#x2F;&#x2F;www.google.com
+# 上面命令将服务器的 HTTP 回应所设置 Cookie 写入文本文件cookies.txt<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></li>
+<li><p><code>-d</code></p>
+<p>  <code>-d</code>参数用于发送POST请求的数据体</p>
+  <pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">$ curl -d&#39;login&#x3D;emma＆password&#x3D;123&#39;-X POST https:&#x2F;&#x2F;google.com&#x2F;login
+# 或者
+$ curl -d &#39;login&#x3D;emma&#39; -d &#39;password&#x3D;123&#39; -X POST  https:&#x2F;&#x2F;google.com&#x2F;login
+$ curl -d &#39;@data.txt&#39; https:&#x2F;&#x2F;google.com&#x2F;login
+# 上面命令读取data.txt文件的内容，作为数据体向服务器发送。<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<blockquote>
+<p>使用<code>-d</code>参数以后，<code>HTTP</code> 请求会自动加上标头<code>Content-Type : application/x-www-form-urlencoded</code>。并且会自动将请求转为 <code>POST</code> 方法，因此可以省略<code>-X POST</code>。</p>
+</blockquote>
+</li>
+<li><p><code>--data-urlencode</code></p>
+<p>  <code>--data-urlencode</code>参数等同于<code>-d</code>，发送 <code>POST</code> 请求的数据体，区别在于会自动将发送的数据进行 <code>URL</code> 编码。</p>
+  <pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">$ curl --data-urlencode &#39;comment&#x3D;hello world&#39; https:&#x2F;&#x2F;google.com&#x2F;login
+# 上面代码中，发送的数据hello world之间有一个空格，需要进行 URL 编码。<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></li>
+<li><p><code>-e</code></p>
+<p>  -e参数用来设置 HTTP 的标头Referer，表示请求的来源。</p>
+  <pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">$ curl -e &#39;https:&#x2F;&#x2F;google.com?q&#x3D;example&#39; https:&#x2F;&#x2F;www.example.com
+# 上面命令将Referer标头设为https:&#x2F;&#x2F;google.com?q&#x3D;example。
+
+# -H参数可以通过直接添加标头Referer，达到同样效果。
+$ curl -H &#39;Referer: https:&#x2F;&#x2F;google.com?q&#x3D;example&#39; https:&#x2F;&#x2F;www.example.com<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+<li><p><code>-F</code></p>
+<p>  -F参数用来向服务器上传二进制文件。</p>
+  <pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">    $ curl -F &#39;file&#x3D;@photo.png&#39; https:&#x2F;&#x2F;google.com&#x2F;profile
+    # 上面命令会给 HTTP 请求加上标头Content-Type: multipart&#x2F;form-data，然后将文件photo.png作为file字段上传。
+
+    -F参数可以指定 MIME 类型。
+
+
+    $ curl -F &#39;file&#x3D;@photo.png;type&#x3D;image&#x2F;png&#39; https:&#x2F;&#x2F;google.com&#x2F;profile
+    # 上面命令指定 MIME 类型为image&#x2F;png，否则 curl 会把 MIME 类型设为application&#x2F;octet-stream。
+
+    -F参数也可以指定文件名。
+
+
+    $ curl -F &#39;file&#x3D;@photo.png;filename&#x3D;me.png&#39; https:&#x2F;&#x2F;google.com&#x2F;profile
+    # 上面命令中，原始文件名为photo.png，但是服务器接收到的文件名为me.png。
+    &#96;&#96;&#96;shell
+- &#96;-G&#96;
+    -G参数用来构造 URL 的查询字符串。
+
+    &#96;&#96;&#96;shell
+    $ curl -G -d &#39;q&#x3D;kitties&#39; -d &#39;count&#x3D;20&#39; https:&#x2F;&#x2F;google.com&#x2F;search
+    # 上面命令会发出一个 GET 请求，实际请求的 URL 为https:&#x2F;&#x2F;google.com&#x2F;search?q&#x3D;kitties&amp;count&#x3D;20。如果省略--G，会发出一个 POST 请求。
+
+    如果数据需要 URL 编码，可以结合--data--urlencode参数。
+
+
+    $ curl -G --data-urlencode &#39;comment&#x3D;hello world&#39; https:&#x2F;&#x2F;www.example.com<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+<li><p><code>-H</code></p>
+<p>  -H参数添加 HTTP 请求的标头。</p>
+  <pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">$ curl -H &#39;Accept-Language: en-US&#39; https:&#x2F;&#x2F;google.com
+# 上面命令添加 HTTP 标头Accept-Language: en-US。
+
+
+$ curl -H &#39;Accept-Language: en-US&#39; -H &#39;Secret-Message: xyzzy&#39; https:&#x2F;&#x2F;google.com
+# 上面命令添加两个 HTTP 标头。
+
+
+$ curl -d &#39;&#123;&quot;login&quot;: &quot;emma&quot;, &quot;pass&quot;: &quot;123&quot;&#125;&#39; -H &#39;Content-Type: application&#x2F;json&#39; https:&#x2F;&#x2F;google.com&#x2F;login
+# 上面命令添加 HTTP 请求的标头是Content-Type: application&#x2F;json，然后用-d参数发送 JSON 数据。<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+<li><p><code>-i</code></p>
+<p>  -i参数打印出服务器回应的 HTTP 标头。</p>
+  <pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">$ curl -i https:&#x2F;&#x2F;www.example.com
+# 上面命令收到服务器回应后，先输出服务器回应的标头，然后空一行，再输出网页的源码。<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></li>
+<li><p><code>-I</code></p>
+<p>  -I参数向服务器发出 HEAD 请求，然会将服务器返回的 HTTP 标头打印出来。</p>
+  <pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">$ curl -I https:&#x2F;&#x2F;www.example.com
+# 上面命令输出服务器对 HEAD 请求的回应。
+
+--head参数等同于-I。
+
+$ curl --head https:&#x2F;&#x2F;www.example.com
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+<li><p><code>-k</code></p>
+<p>  -k参数指定跳过 SSL 检测。</p>
+  <pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">$ curl -k https:&#x2F;&#x2F;www.example.com
+上面命令不会检查服务器的 SSL 证书是否正确。<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></li>
+<li><p><code>-L</code><br>  -L参数会让 HTTP 请求跟随服务器的重定向。curl 默认不跟随重定向。</p>
+  <pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">$ curl -L -d &#39;tweet&#x3D;hi&#39; https:&#x2F;&#x2F;api.twitter.com&#x2F;tweet<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li><p><code>--limit-rate</code></p>
+<p>  –limit-rate用来限制 HTTP 请求和回应的带宽，模拟慢网速的环境。</p>
+  <pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">$ curl --limit-rate 200k https:&#x2F;&#x2F;google.com
+# 上面命令将带宽限制在每秒 200K 字节。<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></li>
+<li><p><code>-o</code></p>
+<p>  -o参数将服务器的回应保存成文件，等同于wget命令。</p>
+  <pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">$ curl -o example.html https:&#x2F;&#x2F;www.example.com
+# 上面命令将www.example.com保存成example.html。<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></li>
+<li><p><code>-O</code><br>  -O参数将服务器回应保存成文件，并将 URL 的最后部分当作文件名。</p>
+  <pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">$ curl -O https:&#x2F;&#x2F;www.example.com&#x2F;foo&#x2F;bar.html
+# 上面命令将服务器回应保存成文件，文件名为bar.html。<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></li>
+<li><p><code>-s</code></p>
+<p>  -s参数将不输出错误和进度信息。</p>
+  <pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">$ curl -s https:&#x2F;&#x2F;www.example.com
+# 上面命令一旦发生错误，不会显示错误信息。不发生错误的话，会正常显示运行结果。
+
+如果想让 curl 不产生任何输出，可以使用下面的命令。
+
+
+$ curl -s -o &#x2F;dev&#x2F;null https:&#x2F;&#x2F;google.com<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+<li><p><code>-S</code></p>
+<p>  -S参数指定只输出错误信息，通常与-s一起使用。</p>
+  <pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">$ curl -s -o &#x2F;dev&#x2F;null https:&#x2F;&#x2F;google.com
+# 上面命令没有任何输出，除非发生错误。<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></li>
+<li><p><code>-u</code></p>
+<p>  -u参数用来设置服务器认证的用户名和密码。</p>
+  <pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">$ curl -u &#39;bob:12345&#39; https:&#x2F;&#x2F;google.com&#x2F;login
+# 上面命令设置用户名为bob，密码为12345，然后将其转为 HTTP 标头Authorization: Basic Ym9iOjEyMzQ1。
+
+curl 能够识别 URL 里面的用户名和密码。
+
+
+$ curl https:&#x2F;&#x2F;bob:12345@google.com&#x2F;login
+# 上面命令能够识别 URL 里面的用户名和密码，将其转为上个例子里面的 HTTP 标头。
+
+
+$ curl -u &#39;bob&#39; https:&#x2F;&#x2F;google.com&#x2F;login
+# 上面命令只设置了用户名，执行后，curl 会提示用户输入密码。<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+<li><p><code>-v</code></p>
+<p>  -v参数输出通信的整个过程，用于调试。</p>
+  <pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">$ curl -v https:&#x2F;&#x2F;www.example.com
+
+--trace参数也可以用于调试，还会输出原始的二进制数据。
+
+
+$ curl --trace - https:&#x2F;&#x2F;www.example.com<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+<li><p><code>-x</code></p>
+<p>  -x参数指定 HTTP 请求的代理。</p>
+  <pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">$ curl -x socks5:&#x2F;&#x2F;james:cats@myproxy.com:8080 https:&#x2F;&#x2F;www.example.com
+# 上面命令指定 HTTP 请求通过myproxy.com:8080的 socks5 代理发出。
+
+如果没有指定代理协议，默认为 HTTP。
+
+
+$ curl -x james:cats@myproxy.com:8080 https:&#x2F;&#x2F;www.example.com
+# 上面命令中，请求的代理使用 HTTP 协议。<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+<li><p><code>-X</code></p>
+<p>  -X参数指定 HTTP 请求的方法。</p>
+  <pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">$ curl -X POST https:&#x2F;&#x2F;www.example.com
+# 上面命令对https:&#x2F;&#x2F;www.example.com发出 POST 请求。<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></li>
+</ul>
+<hr>
+<p><a target="_blank" rel="noopener" href="https://www.ruanyifeng.com/blog/2019/09/curl-reference.html">参考</a></p>
+<h1 id="openstack-api"><a href="#openstack-api" class="headerlink" title="openstack api"></a>openstack api</h1><h2 id="1-API接口"><a href="#1-API接口" class="headerlink" title="1.API接口"></a>1.API接口</h2><p><a target="_blank" rel="noopener" href="https://docs.openstack.org/api-quick-start/#"><strong>OpenSatckAPI</strong></a></p>
+<h2 id="2-获取token"><a href="#2-获取token" class="headerlink" title="2.获取token"></a>2.获取token</h2><ul>
+<li><p><code>openstack cli</code></p>
+  <pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">$ source openrc
+$ openstack token issue<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></li>
+<li><p><code>curl</code></p>
+  <pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">[stack@openstack ~]$ curl -i -X POST http:&#x2F;&#x2F;10.196.33.10&#x2F;identity&#x2F;v3&#x2F;auth&#x2F;tokens -H &quot;Content-Type: application&#x2F;json&quot; -d &#39;&#123;&quot;auth&quot;: &#123;&quot;identity&quot;: &#123;&quot;methods&quot;: [&quot;password&quot;],&quot;password&quot;: &#123;&quot;user&quot;: &#123;&quot;name&quot;: &quot;admin&quot;, &quot;domain&quot;: &#123;&quot;name&quot;: &quot;default&quot;&#125;,&quot;password&quot;: &quot;openstack&quot;&#125;&#125;&#125;&#125;&#125;&#39;
+HTTP&#x2F;1.1 201 CREATED
+Date: Sun, 01 Aug 2021 03:24:53 GMT
+Server: Apache&#x2F;2.4.6 (CentOS) OpenSSL&#x2F;1.0.2k-fips mod_wsgi&#x2F;3.4 Python&#x2F;2.7.5
+Content-Type: application&#x2F;json
+Content-Length: 312
+X-Subject-Token:    gAAAAABhBhQFZ8P6dDC2j1oTN0I0D9qjM57MM43zgLS7g8_rzqgqaQXSrgtmFiRSjsegI_qBjFmoS3UKayhTs3gWUr-nl1DU6PyilCp    NHqXWPwU12dgtKLhWWzGLThssnMaCjcglzG2T4olLg1WNVYztjYfQM_HErg
+Vary: X-Auth-Token
+x-openstack-request-id: req-acc25d01-a2a5-44fd-9ea8-4ac8bf82c51f
+Connection: close
+
+&#123;&quot;token&quot;: &#123;&quot;issued_at&quot;: &quot;2021-08-01T03:24:53.000000Z&quot;, &quot;audit_ids&quot;: [&quot;6yiziGokQJijxOfR7SfJ0A&quot;],     &quot;methods&quot;: [&quot;password&quot;], &quot;expires_at&quot;: &quot;2021-08-01T04:24:53.000000Z&quot;, &quot;user&quot;: &#123;&quot;password_expires_at&quot;:   null, &quot;domain&quot;: &#123;&quot;id&quot;: &quot;default&quot;, &quot;name&quot;: &quot;Default&quot;&#125;, &quot;id&quot;: &quot;d3336c1c8b434b5285ae7dd2afc8c9ac&quot;,   &quot;name&quot;: &quot;admin&quot;&#125;&#125;&#125;[stack@openstack ~]$<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+  <pre class="line-numbers language-json" data-language="json"><code class="language-json"># Request
+<span class="token punctuation">&#123;</span>
+    <span class="token property">"auth"</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+        <span class="token property">"identity"</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+            <span class="token property">"methods"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+                <span class="token string">"password"</span>
+            <span class="token punctuation">]</span><span class="token punctuation">,</span>
+            <span class="token property">"password"</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+                <span class="token property">"user"</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+                    <span class="token property">"name"</span><span class="token operator">:</span> <span class="token string">"admin"</span><span class="token punctuation">,</span>
+                    <span class="token property">"domain"</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+                        <span class="token property">"name"</span><span class="token operator">:</span> <span class="token string">"Default"</span>
+                    <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+                    <span class="token property">"password"</span><span class="token operator">:</span> <span class="token string">"openstack"</span>
+                <span class="token punctuation">&#125;</span>
+            <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+</ul>
+<h2 id="3-获取nova列表"><a href="#3-获取nova列表" class="headerlink" title="3.获取nova列表"></a>3.获取nova列表</h2><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">[stack@openstack ~]$ curl  -X GET http:&#x2F;&#x2F;10.196.33.10&#x2F;compute&#x2F;v2.1&#x2F;servers -H &quot;Content-Type: application&#x2F;json&quot; -H &#39;X-Auth-Token: gAAAAABhBhUbqBPYJY8OObNKQLP93g7U5WZDFzCBEtrGB32b521KsYnZSre-rUVg645bWW6GNLd-G-05v7e5e4xSHMoX_Kf5sUlu5DbSSLZlWAlNGMsT01C3r0Lawbk21sN8CyyDti32GQ_pGHZb7lUGhBgHS0-EVw&#39;|python -m json.tool
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100    15  100    15    0     0    647      0 --:--:-- --:--:-- --:--:--   681
+&#123;
+    &quot;servers&quot;: []
+&#125;
+
+# 由于没有创建vm，所以返回为空，
+
+# 使用flavor举例，获取flavor列表
+[stack@openstack ~]$ curl  -X GET http:&#x2F;&#x2F;10.196.33.10&#x2F;compute&#x2F;v2.1&#x2F;flavors -H &quot;Content-Type: application&#x2F;json&quot; -H &#39;X-Auth-Token: gAAAAABhBhUbqBPYJY8OObNKQLP93g7U5WZDFzCBEtrGB32b521KsYnZSre-rUVg645bWW6GNLd-G-05v7e5e4xSHMoX_Kf5sUlu5DbSSLZlWAlNGMsT01C3r0Lawbk21sN8CyyDti32GQ_pGHZb7lUGhBgHS0-EVw&#39;|python -m json.tool
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100  2241  100  2241    0     0  69713      0 --:--:-- --:--:-- --:--:-- 72290
+&#123;
+    &quot;flavors&quot;: [
+        &#123;
+            &quot;id&quot;: &quot;1&quot;,
+            &quot;links&quot;: [
+                &#123;
+                    &quot;href&quot;: &quot;http:&#x2F;&#x2F;10.196.33.10&#x2F;compute&#x2F;v2.1&#x2F;flavors&#x2F;1&quot;,
+                    &quot;rel&quot;: &quot;self&quot;
+                &#125;,
+                &#123;
+                    &quot;href&quot;: &quot;http:&#x2F;&#x2F;10.196.33.10&#x2F;compute&#x2F;flavors&#x2F;1&quot;,
+                    &quot;rel&quot;: &quot;bookmark&quot;
+                &#125;
+            ],
+            &quot;name&quot;: &quot;m1.tiny&quot;
+        &#125;,
+        &#123;
+            &quot;id&quot;: &quot;2&quot;,
+            &quot;links&quot;: [
+                &#123;
+                    &quot;href&quot;: &quot;http:&#x2F;&#x2F;10.196.33.10&#x2F;compute&#x2F;v2.1&#x2F;flavors&#x2F;2&quot;,
+                    &quot;rel&quot;: &quot;self&quot;
+                &#125;,
+                &#123;
+                    &quot;href&quot;: &quot;http:&#x2F;&#x2F;10.196.33.10&#x2F;compute&#x2F;flavors&#x2F;2&quot;,
+                    &quot;rel&quot;: &quot;bookmark&quot;
+                &#125;
+            ],
+            &quot;name&quot;: &quot;m1.small&quot;
+        &#125;,
+        &#123;
+            &quot;id&quot;: &quot;3&quot;,
+            &quot;links&quot;: [
+                &#123;
+                    &quot;href&quot;: &quot;http:&#x2F;&#x2F;10.196.33.10&#x2F;compute&#x2F;v2.1&#x2F;flavors&#x2F;3&quot;,
+                    &quot;rel&quot;: &quot;self&quot;
+                &#125;,
+                &#123;
+                    &quot;href&quot;: &quot;http:&#x2F;&#x2F;10.196.33.10&#x2F;compute&#x2F;flavors&#x2F;3&quot;,
+                    &quot;rel&quot;: &quot;bookmark&quot;
+                &#125;
+            ],
+            &quot;name&quot;: &quot;m1.medium&quot;
+        &#125;,
+        &#123;
+            &quot;id&quot;: &quot;4&quot;,
+            &quot;links&quot;: [
+                &#123;
+                    &quot;href&quot;: &quot;http:&#x2F;&#x2F;10.196.33.10&#x2F;compute&#x2F;v2.1&#x2F;flavors&#x2F;4&quot;,
+                    &quot;rel&quot;: &quot;self&quot;
+                &#125;,
+                &#123;
+                    &quot;href&quot;: &quot;http:&#x2F;&#x2F;10.196.33.10&#x2F;compute&#x2F;flavors&#x2F;4&quot;,
+                    &quot;rel&quot;: &quot;bookmark&quot;
+                &#125;
+            ],
+            &quot;name&quot;: &quot;m1.large&quot;
+        &#125;,
+        &#123;
+            &quot;id&quot;: &quot;42&quot;,
+            &quot;links&quot;: [
+                &#123;
+                    &quot;href&quot;: &quot;http:&#x2F;&#x2F;10.196.33.10&#x2F;compute&#x2F;v2.1&#x2F;flavors&#x2F;42&quot;,
+                    &quot;rel&quot;: &quot;self&quot;
+                &#125;,
+                &#123;
+                    &quot;href&quot;: &quot;http:&#x2F;&#x2F;10.196.33.10&#x2F;compute&#x2F;flavors&#x2F;42&quot;,
+                    &quot;rel&quot;: &quot;bookmark&quot;
+                &#125;
+            ],
+            &quot;name&quot;: &quot;m1.nano&quot;
+        &#125;,
+        &#123;
+            &quot;id&quot;: &quot;5&quot;,
+            &quot;links&quot;: [
+                &#123;
+                    &quot;href&quot;: &quot;http:&#x2F;&#x2F;10.196.33.10&#x2F;compute&#x2F;v2.1&#x2F;flavors&#x2F;5&quot;,
+                    &quot;rel&quot;: &quot;self&quot;
+                &#125;,
+                &#123;
+                    &quot;href&quot;: &quot;http:&#x2F;&#x2F;10.196.33.10&#x2F;compute&#x2F;flavors&#x2F;5&quot;,
+                    &quot;rel&quot;: &quot;bookmark&quot;
+                &#125;
+            ],
+            &quot;name&quot;: &quot;m1.xlarge&quot;
+        &#125;,
+        &#123;
+            &quot;id&quot;: &quot;84&quot;,
+            &quot;links&quot;: [
+                &#123;
+                    &quot;href&quot;: &quot;http:&#x2F;&#x2F;10.196.33.10&#x2F;compute&#x2F;v2.1&#x2F;flavors&#x2F;84&quot;,
+                    &quot;rel&quot;: &quot;self&quot;
+                &#125;,
+                &#123;
+                    &quot;href&quot;: &quot;http:&#x2F;&#x2F;10.196.33.10&#x2F;compute&#x2F;flavors&#x2F;84&quot;,
+                    &quot;rel&quot;: &quot;bookmark&quot;
+                &#125;
+            ],
+            &quot;name&quot;: &quot;m1.micro&quot;
+        &#125;,
+        &#123;
+            &quot;id&quot;: &quot;c1&quot;,
+            &quot;links&quot;: [
+                &#123;
+                    &quot;href&quot;: &quot;http:&#x2F;&#x2F;10.196.33.10&#x2F;compute&#x2F;v2.1&#x2F;flavors&#x2F;c1&quot;,
+                    &quot;rel&quot;: &quot;self&quot;
+                &#125;,
+                &#123;
+                    &quot;href&quot;: &quot;http:&#x2F;&#x2F;10.196.33.10&#x2F;compute&#x2F;flavors&#x2F;c1&quot;,
+                    &quot;rel&quot;: &quot;bookmark&quot;
+                &#125;
+            ],
+            &quot;name&quot;: &quot;cirros256&quot;
+        &#125;,
+        &#123;
+            &quot;id&quot;: &quot;d1&quot;,
+            &quot;links&quot;: [
+                &#123;
+                    &quot;href&quot;: &quot;http:&#x2F;&#x2F;10.196.33.10&#x2F;compute&#x2F;v2.1&#x2F;flavors&#x2F;d1&quot;,
+                    &quot;rel&quot;: &quot;self&quot;
+                &#125;,
+                &#123;
+                    &quot;href&quot;: &quot;http:&#x2F;&#x2F;10.196.33.10&#x2F;compute&#x2F;flavors&#x2F;d1&quot;,
+                    &quot;rel&quot;: &quot;bookmark&quot;
+                &#125;
+            ],
+            &quot;name&quot;: &quot;ds512M&quot;
+        &#125;,
+        &#123;
+            &quot;id&quot;: &quot;d2&quot;,
+            &quot;links&quot;: [
+                &#123;
+                    &quot;href&quot;: &quot;http:&#x2F;&#x2F;10.196.33.10&#x2F;compute&#x2F;v2.1&#x2F;flavors&#x2F;d2&quot;,
+                    &quot;rel&quot;: &quot;self&quot;
+                &#125;,
+                &#123;
+                    &quot;href&quot;: &quot;http:&#x2F;&#x2F;10.196.33.10&#x2F;compute&#x2F;flavors&#x2F;d2&quot;,
+                    &quot;rel&quot;: &quot;bookmark&quot;
+                &#125;
+            ],
+            &quot;name&quot;: &quot;ds1G&quot;
+        &#125;,
+        &#123;
+            &quot;id&quot;: &quot;d3&quot;,
+            &quot;links&quot;: [
+                &#123;
+                    &quot;href&quot;: &quot;http:&#x2F;&#x2F;10.196.33.10&#x2F;compute&#x2F;v2.1&#x2F;flavors&#x2F;d3&quot;,
+                    &quot;rel&quot;: &quot;self&quot;
+                &#125;,
+                &#123;
+                    &quot;href&quot;: &quot;http:&#x2F;&#x2F;10.196.33.10&#x2F;compute&#x2F;flavors&#x2F;d3&quot;,
+                    &quot;rel&quot;: &quot;bookmark&quot;
+                &#125;
+            ],
+            &quot;name&quot;: &quot;ds2G&quot;
+        &#125;,
+        &#123;
+            &quot;id&quot;: &quot;d4&quot;,
+            &quot;links&quot;: [
+                &#123;
+                    &quot;href&quot;: &quot;http:&#x2F;&#x2F;10.196.33.10&#x2F;compute&#x2F;v2.1&#x2F;flavors&#x2F;d4&quot;,
+                    &quot;rel&quot;: &quot;self&quot;
+                &#125;,
+                &#123;
+                    &quot;href&quot;: &quot;http:&#x2F;&#x2F;10.196.33.10&#x2F;compute&#x2F;flavors&#x2F;d4&quot;,
+                    &quot;rel&quot;: &quot;bookmark&quot;
+                &#125;
+            ],
+            &quot;name&quot;: &quot;ds4G&quot;
+        &#125;
+    ]
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<blockquote>
+<p>如上述两个例子，结合openstack api 实际使用了curl命令，增加对curl命令的了解</p>
+</blockquote>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/BLOG/about" rel="external nofollow noreferrer">dFaruiy</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://dfarui.github.io/BLOG/BLOG/2021/07/29/curl/">https://dfarui.github.io/BLOG/BLOG/2021/07/29/curl/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/BLOG/about" target="_blank">dFaruiy</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/BLOG/tags/linux/">
+                                    <span class="chip bg-color">linux</span>
+                                </a>
+                            
+                                <a href="/BLOG/tags/curl/">
+                                    <span class="chip bg-color">curl</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/BLOG/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/BLOG/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/BLOG/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/BLOG/medias/reward/wechat.jpg" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
+            <div class="card">
+                <a href="/BLOG/2021/07/29/curl/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/BLOG/medias/featureimages/17.jpg" class="responsive-img" alt="curl 调用 openstack api">
+                        
+                        <span class="card-title">curl 调用 openstack api</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-07-30
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/BLOG/categories/curl/" class="post-category">
+                                    curl
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/BLOG/tags/linux/">
+                        <span class="chip bg-color">linux</span>
+                    </a>
+                    
+                    <a href="/BLOG/tags/curl/">
+                        <span class="chip bg-color">curl</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/BLOG/2021/07/21/vimconfig/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/BLOG/medias/featureimages/2.jpg" class="responsive-img" alt="VIM">
+                        
+                        <span class="card-title">VIM</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-07-22
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/BLOG/categories/vim/" class="post-category">
+                                    vim
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/BLOG/tags/linux/">
+                        <span class="chip bg-color">linux</span>
+                    </a>
+                    
+                    <a href="/BLOG/tags/vim/">
+                        <span class="chip bg-color">vim</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('120')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE' || selection.getRangeAt(0).commonAncestorContainer.nodeName === 'CODE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: Farui&#39;s BLOG<br />'
+            + '文章作者: dFaruiy<br />'
+            + '文章链接: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/BLOG/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/BLOG/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/BLOG/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/BLOG/libs/codeBlock/codeShrink.js"></script>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/BLOG/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2021</span>
+            
+            <span id="year">2021</span>
+            <a href="/BLOG/about" target="_blank">dFaruiy</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/dFarui" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:dfaruiy@gmail.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=2279839341" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 2279839341" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/BLOG/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/BLOG/libs/materialize/materialize.min.js"></script>
+    <script src="/BLOG/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/BLOG/libs/aos/aos.js"></script>
+    <script src="/BLOG/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/BLOG/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/BLOG/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    
+    <script async src="/BLOG/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+
+    
+    <script src="/BLOG/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>
