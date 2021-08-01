@@ -411,7 +411,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    3.3k
+                    2.8k
                 </div>
                 
 
@@ -643,193 +643,193 @@ Connection: close
     <span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
 </ul>
-<h2 id="3-获取nova列表"><a href="#3-获取nova列表" class="headerlink" title="3.获取nova列表"></a>3.获取nova列表</h2><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">[stack@openstack ~]$ curl  -X GET http:&#x2F;&#x2F;10.196.33.10&#x2F;compute&#x2F;v2.1&#x2F;servers -H &quot;Content-Type: application&#x2F;json&quot; -H &#39;X-Auth-Token: gAAAAABhBhUbqBPYJY8OObNKQLP93g7U5WZDFzCBEtrGB32b521KsYnZSre-rUVg645bWW6GNLd-G-05v7e5e4xSHMoX_Kf5sUlu5DbSSLZlWAlNGMsT01C3r0Lawbk21sN8CyyDti32GQ_pGHZb7lUGhBgHS0-EVw&#39;|python -m json.tool
+<h2 id="3-获取nova列表"><a href="#3-获取nova列表" class="headerlink" title="3.获取nova列表"></a>3.获取nova列表</h2><pre class="line-numbers language-json" data-language="json"><code class="language-json"><span class="token punctuation">[</span>stack@openstack ~<span class="token punctuation">]</span>$ curl  -X GET http<span class="token operator">:</span><span class="token comment">//10.196.33.10/compute/v2.1/servers -H "Content-Type: application/json" -H 'X-Auth-Token: gAAAAABhBhUbqBPYJY8OObNKQLP93g7U5WZDFzCBEtrGB32b521KsYnZSre-rUVg645bWW6GNLd-G-05v7e5e4xSHMoX_Kf5sUlu5DbSSLZlWAlNGMsT01C3r0Lawbk21sN8CyyDti32GQ_pGHZb7lUGhBgHS0-EVw'|python -m json.tool</span>
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
-100    15  100    15    0     0    647      0 --:--:-- --:--:-- --:--:--   681
-&#123;
-    &quot;servers&quot;: []
-&#125;
+<span class="token number">100</span>    <span class="token number">15</span>  <span class="token number">100</span>    <span class="token number">15</span>    <span class="token number">0</span>     <span class="token number">0</span>    <span class="token number">647</span>      <span class="token number">0</span> --<span class="token operator">:</span>--<span class="token operator">:</span>-- --<span class="token operator">:</span>--<span class="token operator">:</span>-- --<span class="token operator">:</span>--<span class="token operator">:</span>--   <span class="token number">681</span>
+<span class="token punctuation">&#123;</span>
+    <span class="token property">"servers"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+<span class="token punctuation">&#125;</span>
 
 # 由于没有创建vm，所以返回为空，
 
 # 使用flavor举例，获取flavor列表
-[stack@openstack ~]$ curl  -X GET http:&#x2F;&#x2F;10.196.33.10&#x2F;compute&#x2F;v2.1&#x2F;flavors -H &quot;Content-Type: application&#x2F;json&quot; -H &#39;X-Auth-Token: gAAAAABhBhUbqBPYJY8OObNKQLP93g7U5WZDFzCBEtrGB32b521KsYnZSre-rUVg645bWW6GNLd-G-05v7e5e4xSHMoX_Kf5sUlu5DbSSLZlWAlNGMsT01C3r0Lawbk21sN8CyyDti32GQ_pGHZb7lUGhBgHS0-EVw&#39;|python -m json.tool
+<span class="token punctuation">[</span>stack@openstack ~<span class="token punctuation">]</span>$ curl  -X GET http<span class="token operator">:</span><span class="token comment">//10.196.33.10/compute/v2.1/flavors -H "Content-Type: application/json" -H 'X-Auth-Token: gAAAAABhBhUbqBPYJY8OObNKQLP93g7U5WZDFzCBEtrGB32b521KsYnZSre-rUVg645bWW6GNLd-G-05v7e5e4xSHMoX_Kf5sUlu5DbSSLZlWAlNGMsT01C3r0Lawbk21sN8CyyDti32GQ_pGHZb7lUGhBgHS0-EVw'|python -m json.tool</span>
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
-100  2241  100  2241    0     0  69713      0 --:--:-- --:--:-- --:--:-- 72290
-&#123;
-    &quot;flavors&quot;: [
-        &#123;
-            &quot;id&quot;: &quot;1&quot;,
-            &quot;links&quot;: [
-                &#123;
-                    &quot;href&quot;: &quot;http:&#x2F;&#x2F;10.196.33.10&#x2F;compute&#x2F;v2.1&#x2F;flavors&#x2F;1&quot;,
-                    &quot;rel&quot;: &quot;self&quot;
-                &#125;,
-                &#123;
-                    &quot;href&quot;: &quot;http:&#x2F;&#x2F;10.196.33.10&#x2F;compute&#x2F;flavors&#x2F;1&quot;,
-                    &quot;rel&quot;: &quot;bookmark&quot;
-                &#125;
-            ],
-            &quot;name&quot;: &quot;m1.tiny&quot;
-        &#125;,
-        &#123;
-            &quot;id&quot;: &quot;2&quot;,
-            &quot;links&quot;: [
-                &#123;
-                    &quot;href&quot;: &quot;http:&#x2F;&#x2F;10.196.33.10&#x2F;compute&#x2F;v2.1&#x2F;flavors&#x2F;2&quot;,
-                    &quot;rel&quot;: &quot;self&quot;
-                &#125;,
-                &#123;
-                    &quot;href&quot;: &quot;http:&#x2F;&#x2F;10.196.33.10&#x2F;compute&#x2F;flavors&#x2F;2&quot;,
-                    &quot;rel&quot;: &quot;bookmark&quot;
-                &#125;
-            ],
-            &quot;name&quot;: &quot;m1.small&quot;
-        &#125;,
-        &#123;
-            &quot;id&quot;: &quot;3&quot;,
-            &quot;links&quot;: [
-                &#123;
-                    &quot;href&quot;: &quot;http:&#x2F;&#x2F;10.196.33.10&#x2F;compute&#x2F;v2.1&#x2F;flavors&#x2F;3&quot;,
-                    &quot;rel&quot;: &quot;self&quot;
-                &#125;,
-                &#123;
-                    &quot;href&quot;: &quot;http:&#x2F;&#x2F;10.196.33.10&#x2F;compute&#x2F;flavors&#x2F;3&quot;,
-                    &quot;rel&quot;: &quot;bookmark&quot;
-                &#125;
-            ],
-            &quot;name&quot;: &quot;m1.medium&quot;
-        &#125;,
-        &#123;
-            &quot;id&quot;: &quot;4&quot;,
-            &quot;links&quot;: [
-                &#123;
-                    &quot;href&quot;: &quot;http:&#x2F;&#x2F;10.196.33.10&#x2F;compute&#x2F;v2.1&#x2F;flavors&#x2F;4&quot;,
-                    &quot;rel&quot;: &quot;self&quot;
-                &#125;,
-                &#123;
-                    &quot;href&quot;: &quot;http:&#x2F;&#x2F;10.196.33.10&#x2F;compute&#x2F;flavors&#x2F;4&quot;,
-                    &quot;rel&quot;: &quot;bookmark&quot;
-                &#125;
-            ],
-            &quot;name&quot;: &quot;m1.large&quot;
-        &#125;,
-        &#123;
-            &quot;id&quot;: &quot;42&quot;,
-            &quot;links&quot;: [
-                &#123;
-                    &quot;href&quot;: &quot;http:&#x2F;&#x2F;10.196.33.10&#x2F;compute&#x2F;v2.1&#x2F;flavors&#x2F;42&quot;,
-                    &quot;rel&quot;: &quot;self&quot;
-                &#125;,
-                &#123;
-                    &quot;href&quot;: &quot;http:&#x2F;&#x2F;10.196.33.10&#x2F;compute&#x2F;flavors&#x2F;42&quot;,
-                    &quot;rel&quot;: &quot;bookmark&quot;
-                &#125;
-            ],
-            &quot;name&quot;: &quot;m1.nano&quot;
-        &#125;,
-        &#123;
-            &quot;id&quot;: &quot;5&quot;,
-            &quot;links&quot;: [
-                &#123;
-                    &quot;href&quot;: &quot;http:&#x2F;&#x2F;10.196.33.10&#x2F;compute&#x2F;v2.1&#x2F;flavors&#x2F;5&quot;,
-                    &quot;rel&quot;: &quot;self&quot;
-                &#125;,
-                &#123;
-                    &quot;href&quot;: &quot;http:&#x2F;&#x2F;10.196.33.10&#x2F;compute&#x2F;flavors&#x2F;5&quot;,
-                    &quot;rel&quot;: &quot;bookmark&quot;
-                &#125;
-            ],
-            &quot;name&quot;: &quot;m1.xlarge&quot;
-        &#125;,
-        &#123;
-            &quot;id&quot;: &quot;84&quot;,
-            &quot;links&quot;: [
-                &#123;
-                    &quot;href&quot;: &quot;http:&#x2F;&#x2F;10.196.33.10&#x2F;compute&#x2F;v2.1&#x2F;flavors&#x2F;84&quot;,
-                    &quot;rel&quot;: &quot;self&quot;
-                &#125;,
-                &#123;
-                    &quot;href&quot;: &quot;http:&#x2F;&#x2F;10.196.33.10&#x2F;compute&#x2F;flavors&#x2F;84&quot;,
-                    &quot;rel&quot;: &quot;bookmark&quot;
-                &#125;
-            ],
-            &quot;name&quot;: &quot;m1.micro&quot;
-        &#125;,
-        &#123;
-            &quot;id&quot;: &quot;c1&quot;,
-            &quot;links&quot;: [
-                &#123;
-                    &quot;href&quot;: &quot;http:&#x2F;&#x2F;10.196.33.10&#x2F;compute&#x2F;v2.1&#x2F;flavors&#x2F;c1&quot;,
-                    &quot;rel&quot;: &quot;self&quot;
-                &#125;,
-                &#123;
-                    &quot;href&quot;: &quot;http:&#x2F;&#x2F;10.196.33.10&#x2F;compute&#x2F;flavors&#x2F;c1&quot;,
-                    &quot;rel&quot;: &quot;bookmark&quot;
-                &#125;
-            ],
-            &quot;name&quot;: &quot;cirros256&quot;
-        &#125;,
-        &#123;
-            &quot;id&quot;: &quot;d1&quot;,
-            &quot;links&quot;: [
-                &#123;
-                    &quot;href&quot;: &quot;http:&#x2F;&#x2F;10.196.33.10&#x2F;compute&#x2F;v2.1&#x2F;flavors&#x2F;d1&quot;,
-                    &quot;rel&quot;: &quot;self&quot;
-                &#125;,
-                &#123;
-                    &quot;href&quot;: &quot;http:&#x2F;&#x2F;10.196.33.10&#x2F;compute&#x2F;flavors&#x2F;d1&quot;,
-                    &quot;rel&quot;: &quot;bookmark&quot;
-                &#125;
-            ],
-            &quot;name&quot;: &quot;ds512M&quot;
-        &#125;,
-        &#123;
-            &quot;id&quot;: &quot;d2&quot;,
-            &quot;links&quot;: [
-                &#123;
-                    &quot;href&quot;: &quot;http:&#x2F;&#x2F;10.196.33.10&#x2F;compute&#x2F;v2.1&#x2F;flavors&#x2F;d2&quot;,
-                    &quot;rel&quot;: &quot;self&quot;
-                &#125;,
-                &#123;
-                    &quot;href&quot;: &quot;http:&#x2F;&#x2F;10.196.33.10&#x2F;compute&#x2F;flavors&#x2F;d2&quot;,
-                    &quot;rel&quot;: &quot;bookmark&quot;
-                &#125;
-            ],
-            &quot;name&quot;: &quot;ds1G&quot;
-        &#125;,
-        &#123;
-            &quot;id&quot;: &quot;d3&quot;,
-            &quot;links&quot;: [
-                &#123;
-                    &quot;href&quot;: &quot;http:&#x2F;&#x2F;10.196.33.10&#x2F;compute&#x2F;v2.1&#x2F;flavors&#x2F;d3&quot;,
-                    &quot;rel&quot;: &quot;self&quot;
-                &#125;,
-                &#123;
-                    &quot;href&quot;: &quot;http:&#x2F;&#x2F;10.196.33.10&#x2F;compute&#x2F;flavors&#x2F;d3&quot;,
-                    &quot;rel&quot;: &quot;bookmark&quot;
-                &#125;
-            ],
-            &quot;name&quot;: &quot;ds2G&quot;
-        &#125;,
-        &#123;
-            &quot;id&quot;: &quot;d4&quot;,
-            &quot;links&quot;: [
-                &#123;
-                    &quot;href&quot;: &quot;http:&#x2F;&#x2F;10.196.33.10&#x2F;compute&#x2F;v2.1&#x2F;flavors&#x2F;d4&quot;,
-                    &quot;rel&quot;: &quot;self&quot;
-                &#125;,
-                &#123;
-                    &quot;href&quot;: &quot;http:&#x2F;&#x2F;10.196.33.10&#x2F;compute&#x2F;flavors&#x2F;d4&quot;,
-                    &quot;rel&quot;: &quot;bookmark&quot;
-                &#125;
-            ],
-            &quot;name&quot;: &quot;ds4G&quot;
-        &#125;
-    ]
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token number">100</span>  <span class="token number">2241</span>  <span class="token number">100</span>  <span class="token number">2241</span>    <span class="token number">0</span>     <span class="token number">0</span>  <span class="token number">69713</span>      <span class="token number">0</span> --<span class="token operator">:</span>--<span class="token operator">:</span>-- --<span class="token operator">:</span>--<span class="token operator">:</span>-- --<span class="token operator">:</span>--<span class="token operator">:</span>-- <span class="token number">72290</span>
+<span class="token punctuation">&#123;</span>
+    <span class="token property">"flavors"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+        <span class="token punctuation">&#123;</span>
+            <span class="token property">"id"</span><span class="token operator">:</span> <span class="token string">"1"</span><span class="token punctuation">,</span>
+            <span class="token property">"links"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+                <span class="token punctuation">&#123;</span>
+                    <span class="token property">"href"</span><span class="token operator">:</span> <span class="token string">"http://10.196.33.10/compute/v2.1/flavors/1"</span><span class="token punctuation">,</span>
+                    <span class="token property">"rel"</span><span class="token operator">:</span> <span class="token string">"self"</span>
+                <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+                <span class="token punctuation">&#123;</span>
+                    <span class="token property">"href"</span><span class="token operator">:</span> <span class="token string">"http://10.196.33.10/compute/flavors/1"</span><span class="token punctuation">,</span>
+                    <span class="token property">"rel"</span><span class="token operator">:</span> <span class="token string">"bookmark"</span>
+                <span class="token punctuation">&#125;</span>
+            <span class="token punctuation">]</span><span class="token punctuation">,</span>
+            <span class="token property">"name"</span><span class="token operator">:</span> <span class="token string">"m1.tiny"</span>
+        <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+        <span class="token punctuation">&#123;</span>
+            <span class="token property">"id"</span><span class="token operator">:</span> <span class="token string">"2"</span><span class="token punctuation">,</span>
+            <span class="token property">"links"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+                <span class="token punctuation">&#123;</span>
+                    <span class="token property">"href"</span><span class="token operator">:</span> <span class="token string">"http://10.196.33.10/compute/v2.1/flavors/2"</span><span class="token punctuation">,</span>
+                    <span class="token property">"rel"</span><span class="token operator">:</span> <span class="token string">"self"</span>
+                <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+                <span class="token punctuation">&#123;</span>
+                    <span class="token property">"href"</span><span class="token operator">:</span> <span class="token string">"http://10.196.33.10/compute/flavors/2"</span><span class="token punctuation">,</span>
+                    <span class="token property">"rel"</span><span class="token operator">:</span> <span class="token string">"bookmark"</span>
+                <span class="token punctuation">&#125;</span>
+            <span class="token punctuation">]</span><span class="token punctuation">,</span>
+            <span class="token property">"name"</span><span class="token operator">:</span> <span class="token string">"m1.small"</span>
+        <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+        <span class="token punctuation">&#123;</span>
+            <span class="token property">"id"</span><span class="token operator">:</span> <span class="token string">"3"</span><span class="token punctuation">,</span>
+            <span class="token property">"links"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+                <span class="token punctuation">&#123;</span>
+                    <span class="token property">"href"</span><span class="token operator">:</span> <span class="token string">"http://10.196.33.10/compute/v2.1/flavors/3"</span><span class="token punctuation">,</span>
+                    <span class="token property">"rel"</span><span class="token operator">:</span> <span class="token string">"self"</span>
+                <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+                <span class="token punctuation">&#123;</span>
+                    <span class="token property">"href"</span><span class="token operator">:</span> <span class="token string">"http://10.196.33.10/compute/flavors/3"</span><span class="token punctuation">,</span>
+                    <span class="token property">"rel"</span><span class="token operator">:</span> <span class="token string">"bookmark"</span>
+                <span class="token punctuation">&#125;</span>
+            <span class="token punctuation">]</span><span class="token punctuation">,</span>
+            <span class="token property">"name"</span><span class="token operator">:</span> <span class="token string">"m1.medium"</span>
+        <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+        <span class="token punctuation">&#123;</span>
+            <span class="token property">"id"</span><span class="token operator">:</span> <span class="token string">"4"</span><span class="token punctuation">,</span>
+            <span class="token property">"links"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+                <span class="token punctuation">&#123;</span>
+                    <span class="token property">"href"</span><span class="token operator">:</span> <span class="token string">"http://10.196.33.10/compute/v2.1/flavors/4"</span><span class="token punctuation">,</span>
+                    <span class="token property">"rel"</span><span class="token operator">:</span> <span class="token string">"self"</span>
+                <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+                <span class="token punctuation">&#123;</span>
+                    <span class="token property">"href"</span><span class="token operator">:</span> <span class="token string">"http://10.196.33.10/compute/flavors/4"</span><span class="token punctuation">,</span>
+                    <span class="token property">"rel"</span><span class="token operator">:</span> <span class="token string">"bookmark"</span>
+                <span class="token punctuation">&#125;</span>
+            <span class="token punctuation">]</span><span class="token punctuation">,</span>
+            <span class="token property">"name"</span><span class="token operator">:</span> <span class="token string">"m1.large"</span>
+        <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+        <span class="token punctuation">&#123;</span>
+            <span class="token property">"id"</span><span class="token operator">:</span> <span class="token string">"42"</span><span class="token punctuation">,</span>
+            <span class="token property">"links"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+                <span class="token punctuation">&#123;</span>
+                    <span class="token property">"href"</span><span class="token operator">:</span> <span class="token string">"http://10.196.33.10/compute/v2.1/flavors/42"</span><span class="token punctuation">,</span>
+                    <span class="token property">"rel"</span><span class="token operator">:</span> <span class="token string">"self"</span>
+                <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+                <span class="token punctuation">&#123;</span>
+                    <span class="token property">"href"</span><span class="token operator">:</span> <span class="token string">"http://10.196.33.10/compute/flavors/42"</span><span class="token punctuation">,</span>
+                    <span class="token property">"rel"</span><span class="token operator">:</span> <span class="token string">"bookmark"</span>
+                <span class="token punctuation">&#125;</span>
+            <span class="token punctuation">]</span><span class="token punctuation">,</span>
+            <span class="token property">"name"</span><span class="token operator">:</span> <span class="token string">"m1.nano"</span>
+        <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+        <span class="token punctuation">&#123;</span>
+            <span class="token property">"id"</span><span class="token operator">:</span> <span class="token string">"5"</span><span class="token punctuation">,</span>
+            <span class="token property">"links"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+                <span class="token punctuation">&#123;</span>
+                    <span class="token property">"href"</span><span class="token operator">:</span> <span class="token string">"http://10.196.33.10/compute/v2.1/flavors/5"</span><span class="token punctuation">,</span>
+                    <span class="token property">"rel"</span><span class="token operator">:</span> <span class="token string">"self"</span>
+                <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+                <span class="token punctuation">&#123;</span>
+                    <span class="token property">"href"</span><span class="token operator">:</span> <span class="token string">"http://10.196.33.10/compute/flavors/5"</span><span class="token punctuation">,</span>
+                    <span class="token property">"rel"</span><span class="token operator">:</span> <span class="token string">"bookmark"</span>
+                <span class="token punctuation">&#125;</span>
+            <span class="token punctuation">]</span><span class="token punctuation">,</span>
+            <span class="token property">"name"</span><span class="token operator">:</span> <span class="token string">"m1.xlarge"</span>
+        <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+        <span class="token punctuation">&#123;</span>
+            <span class="token property">"id"</span><span class="token operator">:</span> <span class="token string">"84"</span><span class="token punctuation">,</span>
+            <span class="token property">"links"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+                <span class="token punctuation">&#123;</span>
+                    <span class="token property">"href"</span><span class="token operator">:</span> <span class="token string">"http://10.196.33.10/compute/v2.1/flavors/84"</span><span class="token punctuation">,</span>
+                    <span class="token property">"rel"</span><span class="token operator">:</span> <span class="token string">"self"</span>
+                <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+                <span class="token punctuation">&#123;</span>
+                    <span class="token property">"href"</span><span class="token operator">:</span> <span class="token string">"http://10.196.33.10/compute/flavors/84"</span><span class="token punctuation">,</span>
+                    <span class="token property">"rel"</span><span class="token operator">:</span> <span class="token string">"bookmark"</span>
+                <span class="token punctuation">&#125;</span>
+            <span class="token punctuation">]</span><span class="token punctuation">,</span>
+            <span class="token property">"name"</span><span class="token operator">:</span> <span class="token string">"m1.micro"</span>
+        <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+        <span class="token punctuation">&#123;</span>
+            <span class="token property">"id"</span><span class="token operator">:</span> <span class="token string">"c1"</span><span class="token punctuation">,</span>
+            <span class="token property">"links"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+                <span class="token punctuation">&#123;</span>
+                    <span class="token property">"href"</span><span class="token operator">:</span> <span class="token string">"http://10.196.33.10/compute/v2.1/flavors/c1"</span><span class="token punctuation">,</span>
+                    <span class="token property">"rel"</span><span class="token operator">:</span> <span class="token string">"self"</span>
+                <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+                <span class="token punctuation">&#123;</span>
+                    <span class="token property">"href"</span><span class="token operator">:</span> <span class="token string">"http://10.196.33.10/compute/flavors/c1"</span><span class="token punctuation">,</span>
+                    <span class="token property">"rel"</span><span class="token operator">:</span> <span class="token string">"bookmark"</span>
+                <span class="token punctuation">&#125;</span>
+            <span class="token punctuation">]</span><span class="token punctuation">,</span>
+            <span class="token property">"name"</span><span class="token operator">:</span> <span class="token string">"cirros256"</span>
+        <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+        <span class="token punctuation">&#123;</span>
+            <span class="token property">"id"</span><span class="token operator">:</span> <span class="token string">"d1"</span><span class="token punctuation">,</span>
+            <span class="token property">"links"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+                <span class="token punctuation">&#123;</span>
+                    <span class="token property">"href"</span><span class="token operator">:</span> <span class="token string">"http://10.196.33.10/compute/v2.1/flavors/d1"</span><span class="token punctuation">,</span>
+                    <span class="token property">"rel"</span><span class="token operator">:</span> <span class="token string">"self"</span>
+                <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+                <span class="token punctuation">&#123;</span>
+                    <span class="token property">"href"</span><span class="token operator">:</span> <span class="token string">"http://10.196.33.10/compute/flavors/d1"</span><span class="token punctuation">,</span>
+                    <span class="token property">"rel"</span><span class="token operator">:</span> <span class="token string">"bookmark"</span>
+                <span class="token punctuation">&#125;</span>
+            <span class="token punctuation">]</span><span class="token punctuation">,</span>
+            <span class="token property">"name"</span><span class="token operator">:</span> <span class="token string">"ds512M"</span>
+        <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+        <span class="token punctuation">&#123;</span>
+            <span class="token property">"id"</span><span class="token operator">:</span> <span class="token string">"d2"</span><span class="token punctuation">,</span>
+            <span class="token property">"links"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+                <span class="token punctuation">&#123;</span>
+                    <span class="token property">"href"</span><span class="token operator">:</span> <span class="token string">"http://10.196.33.10/compute/v2.1/flavors/d2"</span><span class="token punctuation">,</span>
+                    <span class="token property">"rel"</span><span class="token operator">:</span> <span class="token string">"self"</span>
+                <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+                <span class="token punctuation">&#123;</span>
+                    <span class="token property">"href"</span><span class="token operator">:</span> <span class="token string">"http://10.196.33.10/compute/flavors/d2"</span><span class="token punctuation">,</span>
+                    <span class="token property">"rel"</span><span class="token operator">:</span> <span class="token string">"bookmark"</span>
+                <span class="token punctuation">&#125;</span>
+            <span class="token punctuation">]</span><span class="token punctuation">,</span>
+            <span class="token property">"name"</span><span class="token operator">:</span> <span class="token string">"ds1G"</span>
+        <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+        <span class="token punctuation">&#123;</span>
+            <span class="token property">"id"</span><span class="token operator">:</span> <span class="token string">"d3"</span><span class="token punctuation">,</span>
+            <span class="token property">"links"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+                <span class="token punctuation">&#123;</span>
+                    <span class="token property">"href"</span><span class="token operator">:</span> <span class="token string">"http://10.196.33.10/compute/v2.1/flavors/d3"</span><span class="token punctuation">,</span>
+                    <span class="token property">"rel"</span><span class="token operator">:</span> <span class="token string">"self"</span>
+                <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+                <span class="token punctuation">&#123;</span>
+                    <span class="token property">"href"</span><span class="token operator">:</span> <span class="token string">"http://10.196.33.10/compute/flavors/d3"</span><span class="token punctuation">,</span>
+                    <span class="token property">"rel"</span><span class="token operator">:</span> <span class="token string">"bookmark"</span>
+                <span class="token punctuation">&#125;</span>
+            <span class="token punctuation">]</span><span class="token punctuation">,</span>
+            <span class="token property">"name"</span><span class="token operator">:</span> <span class="token string">"ds2G"</span>
+        <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+        <span class="token punctuation">&#123;</span>
+            <span class="token property">"id"</span><span class="token operator">:</span> <span class="token string">"d4"</span><span class="token punctuation">,</span>
+            <span class="token property">"links"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+                <span class="token punctuation">&#123;</span>
+                    <span class="token property">"href"</span><span class="token operator">:</span> <span class="token string">"http://10.196.33.10/compute/v2.1/flavors/d4"</span><span class="token punctuation">,</span>
+                    <span class="token property">"rel"</span><span class="token operator">:</span> <span class="token string">"self"</span>
+                <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+                <span class="token punctuation">&#123;</span>
+                    <span class="token property">"href"</span><span class="token operator">:</span> <span class="token string">"http://10.196.33.10/compute/flavors/d4"</span><span class="token punctuation">,</span>
+                    <span class="token property">"rel"</span><span class="token operator">:</span> <span class="token string">"bookmark"</span>
+                <span class="token punctuation">&#125;</span>
+            <span class="token punctuation">]</span><span class="token punctuation">,</span>
+            <span class="token property">"name"</span><span class="token operator">:</span> <span class="token string">"ds4G"</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">]</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <blockquote>
 <p>如上述两个例子，结合openstack api 实际使用了curl命令，增加对curl命令的了解</p>
 </blockquote>
