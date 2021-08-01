@@ -1,5 +1,5 @@
 ---
-title: curl 调用 openstack api
+title: curl 
 date: 2021-07-30 03:32:36
 author: dFaruiy
 tags: 
