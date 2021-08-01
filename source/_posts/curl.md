@@ -335,7 +335,7 @@ keywords: curl
 
 ## 3.获取nova列表
 
-```shell
+```json
 [stack@openstack ~]$ curl  -X GET http://10.196.33.10/compute/v2.1/servers -H "Content-Type: application/json" -H 'X-Auth-Token: gAAAAABhBhUbqBPYJY8OObNKQLP93g7U5WZDFzCBEtrGB32b521KsYnZSre-rUVg645bWW6GNLd-G-05v7e5e4xSHMoX_Kf5sUlu5DbSSLZlWAlNGMsT01C3r0Lawbk21sN8CyyDti32GQ_pGHZb7lUGhBgHS0-EVw'|python -m json.tool
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
