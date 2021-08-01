@@ -90,11 +90,11 @@ checking for tgetent()… configure: error: NOT FOUND!
 You need to install a terminal library; for example ncurses.
 Or specify the name of the library with –with-tlib.
 ```
-workaround
+**workaround**
 ```shell
 dnf install ncurses ncurses-devel
 ```
-编译安装
+**编译安装**
 ```shell
 make && make install
 ```
@@ -104,6 +104,9 @@ make && make install
 ### Plugin and Instruction manual
 - `VundleVim/Vundle.vim`
    **插件管理**
+   ```shell
+   git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+   ```
 - `Lokaltog/vim-powerline`
    **状态栏，vimrc配置**
    ```vim
@@ -409,6 +412,8 @@ make && make install
 
 ## 配置完成的VIM
 ![vim](https://raw.githubusercontent.com/dFarui/images/master/vim.png)
+
+![vim1](https://raw.githubusercontent.com/dFarui/images/master/vim1.png)
 
 ## 完整的configure 
 
