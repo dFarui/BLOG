@@ -98,7 +98,15 @@ dnf install ncurses ncurses-devel
 ```shell
 make && make install
 ```
+如果编译之后，vim并没有支持python3，大概率最重要的参数—with-python3-config-dir 路径写的不正确，可以使用python3-config --configdir查看路径，其实高版本的vim是不需要这个参数的，安装脚本可以自行找到--—with-python-config-dir参数，但是需要有python-devel支持
+如果没有，可以使用dnf安装，我的环境使用如下命令安装
+```shell
+dnf install python36-devel
 
+# test
+[root@centos8 vim82]# python3-config --configdir
+/usr/lib64/python3.6/config-3.6m-x86_64-linux-gnu
+```
 ## VIM config
 
 ### Plugin and Instruction manual
