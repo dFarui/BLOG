@@ -49,7 +49,6 @@ keywords: curl
     # 上面命令会生成一个标头Cookie: foo=bar，向服务器发送一个名为foo、值为bar的 Cookie。
     ```
 
-
 - `-c`
     
     `-c` 参数将服务器设置的 `Cookie` 写入一个文件。
