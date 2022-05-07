@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="networks">
+    <meta name="keywords" content="K8S 5G">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>计算机网络 | Farui&#39;s BLOG</title>
+    <title>K8S 学习记录 | Farui&#39;s BLOG</title>
     <link rel="icon" type="image/png" href="/BLOG/medias/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/BLOG/libs/awesome/css/all.css">
@@ -247,12 +247,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/BLOG/medias/featureimages/9.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/BLOG/medias/featureimages/15.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">计算机网络</h1>
+                    <h1 class="description center-align post-title">K8S 学习记录</h1>
                 </div>
             </div>
         </div>
@@ -368,8 +368,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/BLOG/tags/Networks/">
-                                <span class="chip bg-color">Networks</span>
+                            <a href="/BLOG/tags/K8S/">
+                                <span class="chip bg-color">K8S</span>
                             </a>
                         
                     </div>
@@ -380,8 +380,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/BLOG/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" class="post-category">
-                                计算机网络
+                            <a href="/BLOG/categories/K8S/" class="post-category">
+                                K8S
                             </a>
                         
                     </div>
@@ -393,7 +393,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2021-07-18
+                    2022-05-07
                 </div>
                 
 
@@ -407,7 +407,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.5k
+                    350
                 </div>
                 
 
@@ -432,72 +432,13 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="HTTP-基本概念"><a href="#HTTP-基本概念" class="headerlink" title="HTTP 基本概念"></a>HTTP 基本概念</h1><h2 id="HTTP是什么？描述一下"><a href="#HTTP是什么？描述一下" class="headerlink" title="HTTP是什么？描述一下"></a>HTTP是什么？描述一下</h2><p><code>HTTP</code> 是超文本传输协议，也就是<code>HyperText Transfer Protocol</code>。</p>
-<h2 id="超文本传输协议"><a href="#超文本传输协议" class="headerlink" title="超文本传输协议"></a>超文本传输协议</h2><ul>
-<li><p>协议<br>HTTP 是一个用在计算机世界里的协议。它使用计算机能够理解的语言确立了一种计算机之间交流通信的规范（两个以上的参与者），以及相关的各种控制和错误处理方式（行为约定和规范）。</p>
-</li>
-<li><p>传输<br>所谓的「传输」，很好理解，就是把一堆东西从 <code>A</code> 点搬到 <code>B</code> 点，或者从 <code>B</code> 点 搬到 <code>A</code> 点。</p>
-<p>别轻视了这个简单的动作，它至少包含两项重要的信息。</p>
-<p><code>HTTP</code> 协议是一个双向协议。</p>
-<p>我们在上网冲浪时，浏览器是请求方 <code>A</code> ，百度网站就是应答方 <code>B</code>。双方约定用 HTTP 协议来通信，于是浏览器把请求数据发送给网站,网站再把一些数据返回给浏览器，最后由浏览器渲染在屏幕，就可以看到图片、视频了。</p>
-<p>数据虽然是在 <code>A</code> 和 <code>B</code> 之间传输，但允许中间有中转或接力。</p>
-<p>就好像第一排的同学想穿递纸条给最后一排的同学，那么传递的过程中就需要经过好多个同学（中间人），这样的传输方式就从<code>「A &lt; --- &gt; B」，变成了「A &lt;-&gt; N &lt;-&gt; M &lt;-&gt; B」</code>。</p>
-<p>而在 <code>HTTP</code> 里，需要中间人遵从 <code>HTTP</code> 协议，只要不打扰基本的数据传输，就可以添加任意额外的东西。</p>
-<p>针对传输，我们可以进一步理解了 <code>HTTP</code>。</p>
-<p><code>HTTP</code> 是一个在计算机世界里专门用来在两点之间传输数据的约定和规范。</p>
-</li>
-</ul>
-<ul>
-<li>超文本<br><code>HTTP</code> 传输的内容是「超文本」。我们先来理解「文本」，在互联网早期的时候只是简单的字符文字，但现在「文本」。的涵义已经可以扩展为图片、视频、压缩包等，在<code>HTTP</code>眼里这些都算做「文本」。再来理解「超文本」，它就是超越了普通文本的文本，它是文字、图片、视频等的混合体最关键有超链接，能从一个超文本跳转到另外一  个超文本。<code>HTML</code> 就是最常见的超文本了，它本身只是纯文字文件，但内部用很多标签定义了图片、视频等的链接，在经过浏览器的解释，呈现给我  们的就是一个文字、有画面的网页了。OK，经过了对 <code>HTTP</code> 里这三个名词的详细解释，就可以给出比「超文本传输协议」这七个字更准确更有技术含量的答案：<code>HTTP</code> 是一个在计算机世界里专门在「两点」之间「传输」文字、图片、音频、视频等「超文本」数据的「约定和规范」。</li>
-</ul>
-<h2 id="那「HTTP-是用于从互联网服务器传输超文本到本地浏览器的协议HTTP」-，这种说法正确吗？"><a href="#那「HTTP-是用于从互联网服务器传输超文本到本地浏览器的协议HTTP」-，这种说法正确吗？" class="headerlink" title="那「HTTP 是用于从互联网服务器传输超文本到本地浏览器的协议HTTP」 ，这种说法正确吗？"></a>那「HTTP 是用于从互联网服务器传输超文本到本地浏览器的协议HTTP」 ，这种说法正确吗？</h2><p>这种说法是不正确的。因为也可以是「服务器&lt; – &gt;服务器」，所以采用两点之间的描述会更准确。</p>
-<h2 id="HTTP-常见的状态码，有哪些？"><a href="#HTTP-常见的状态码，有哪些？" class="headerlink" title="HTTP 常见的状态码，有哪些？"></a>HTTP 常见的状态码，有哪些？</h2><ul>
-<li><p>1xx</p>
-<p>1xx 类状态码属于提示信息，是协议处理中的一种中间状态，实际用到的比较少。</p>
-</li>
-<li><p>2xx</p>
-<p>2xx 类状态码表示服务器成功处理了客户端的请求，也是我们最愿意看到的状态。</p>
-<pre><code>「200 OK」是最常见的成功状态码，表示一切正常。如果是非 HEAD 请求，服务器返回的响应头都会有 body 数据。
+                <h1 id="K8S"><a href="#K8S" class="headerlink" title="K8S"></a>K8S</h1><h2 id="K8S-网络"><a href="#K8S-网络" class="headerlink" title="K8S 网络"></a>K8S 网络</h2><pre class="line-numbers language-none"><code class="language-none">网络名字空间(network namespace)是Linux内核提供的一项非常重要的功能，它是网络虚拟化技术的基础，也是Kubernetes和以Docker为代表的容器技术在实现它们各自的网络时所依赖的基础。所以，要理解Kubernetes的网络工作原理，首先要从network namespace入手。
 
-「204 No Content」也是常见的成功状态码，与 200 OK 基本相同，但响应头没有 body 数据。
+在Linux内核里，每个network namespace都有它自己的网络设置，比如像：网络接口(network interfaces)，路由表(routing tables)等。我们利用network namespace，可以把不同的网络设置彼此隔离开来。当运行多个Docker容器的时候，Docker会在每个容器内部创建相应的network namespace，从而实现不同容器之间的网络隔离。
 
-「206 Partial Content」是应用于 HTTP 分块下载或断电续传，表示响应返回的 body 数据并不是资源的全部，而是其中的一部分，也是服务器处理成功的状态。
-</code></pre>
-</li>
-<li><p>3xx</p>
-<p>3xx 类状态码表示客户端请求的资源发送了变动，需要客户端用新的 URL 重新发送请求获取资源，也就是重定向。</p>
-<pre><code>「301 Moved Permanently」表示永久重定向，说明请求的资源已经不存在了，需改用新的 URL 再次访问。
+但是光有隔离还不行，因为容器还要和外界进行网络联通，所以除了network namespace以外，另一个重要的概念是网桥(network bridge)。它是由Linux内核提供的一种链路层设备，用于在不同网段之间转发数据包。Docker就是利用网桥来实现容器和外界之间的通信的。默认情况下，Docker服务会在它所在的机器上创建一个名为docker0的网桥。下面我们就先从docker0入手，通过一系列动手实验，了解网桥在容器之间进行通信时所起的作用。<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-「302 Moved Permanently」表示临时重定向，说明请求的资源还在，但暂时需要用另一个 URL 来访问。
-
- 301 和 302 都会在响应头里使用字段 Location，指明后续要跳转的 URL，浏览器会自动重定向新的 URL。
-
-「304 Not Modified」不具有跳转的含义，表示资源未修改，重定向已存在的缓冲文件，也称缓存重定向，用于缓存控制。
-</code></pre>
-</li>
-<li><p>4xx</p>
-<p>4xx 类状态码表示客户端发送的报文有误，服务器无法处理，也就是错误码的含义。</p>
-<pre><code>「400 Bad Request」表示客户端请求的报文有错误，但只是个笼统的错误。
-
-「403 Forbidden」表示服务器禁止访问资源，并不是客户端的请求出错。
-
-「404 Not Found」表示请求的资源在服务器上不存在或未找到，所以无法提供给客户端。
-</code></pre>
-</li>
-<li><p>5xx</p>
-<p>5xx 类状态码表示客户端请求报文正确，但是服务器处理时内部发生了错误，属于服务器端的错误码。</p>
-<pre><code>「500 Internal Server Error」与 400 类型，是个笼统通用的错误码，服务器发生了什么错误，我们并不知道。
-
-「501 Not Implemented」表示客户端请求的功能还不支持，类似“即将开业，敬请期待”的意思。
-
-「502 Bad Gateway」通常是服务器作为网关或代理时返回的错误码，表示服务器自身工作正常，访问后端服务器发生了错误。
-
-「503 Service Unavailable」表示服务器当前很忙，暂时无法响应服务器，类似“网络服务正忙，请稍后重试”的意思。
-</code></pre>
-</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/dFarui/images/master/20210722024516.png" alt="test"></p>
-
+<h3 id="Network-bridge"><a href="#Network-bridge" class="headerlink" title="Network bridge"></a>Network bridge</h3><h3 id="Network-namespace"><a href="#Network-namespace" class="headerlink" title="Network namespace"></a>Network namespace</h3>
                 
             </div>
             <hr/>
@@ -523,7 +464,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://dfarui.github.io/BLOG/BLOG/2021/07/18/ji-suan-ji-wang-luo/">https://dfarui.github.io/BLOG/BLOG/2021/07/18/ji-suan-ji-wang-luo/</a>
+                    <a href="https://dfarui.github.io/BLOG/BLOG/2022/05/07/k8s/">https://dfarui.github.io/BLOG/BLOG/2022/05/07/k8s/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -561,8 +502,8 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/BLOG/tags/Networks/">
-                                    <span class="chip bg-color">Networks</span>
+                                <a href="/BLOG/tags/K8S/">
+                                    <span class="chip bg-color">K8S</span>
                                 </a>
                             
                         </div>
@@ -734,17 +675,18 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/BLOG/2021/07/21/vimconfig/">
+                <a href="/BLOG/2022/05/07/k8s/">
                     <div class="card-image">
                         
                         
-                        <img src="/BLOG/medias/featureimages/2.jpg" class="responsive-img" alt="VIM">
+                        <img src="/BLOG/medias/featureimages/15.jpg" class="responsive-img" alt="K8S 学习记录">
                         
-                        <span class="card-title">VIM</span>
+                        <span class="card-title">K8S 学习记录</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -754,15 +696,65 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-07-22
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-05-07
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/BLOG/categories/vim/" class="post-category">
-                                    vim
+                            <a href="/BLOG/categories/K8S/" class="post-category">
+                                    K8S
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/BLOG/tags/K8S/">
+                        <span class="chip bg-color">K8S</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/BLOG/2021/07/29/curl/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/BLOG/medias/featureimages/12.jpg" class="responsive-img" alt="curl">
+                        
+                        <span class="card-title">curl</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-07-30
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/BLOG/categories/curl/" class="post-category">
+                                    curl
                                 </a>
                             
                             
@@ -776,58 +768,8 @@
                         <span class="chip bg-color">linux</span>
                     </a>
                     
-                    <a href="/BLOG/tags/vim/">
-                        <span class="chip bg-color">vim</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                本篇&nbsp;<i class="far fa-dot-circle"></i>
-            </div>
-            <div class="card">
-                <a href="/BLOG/2021/07/18/ji-suan-ji-wang-luo/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/BLOG/medias/featureimages/9.jpg" class="responsive-img" alt="计算机网络">
-                        
-                        <span class="card-title">计算机网络</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            
-                        
-                    </div>
-                    <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-07-18
-                            </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/BLOG/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" class="post-category">
-                                    计算机网络
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/BLOG/tags/Networks/">
-                        <span class="chip bg-color">Networks</span>
+                    <a href="/BLOG/tags/curl/">
+                        <span class="chip bg-color">curl</span>
                     </a>
                     
                 </div>
